@@ -10,6 +10,7 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+package-lock.json
 
 # IDEs and editors
 .idea/
@@ -40,3 +41,42 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Environment and secret files
+.env
+.env.local
+.env.*.local
+
+# MacOS-specific files
+.AppleDouble
+.LSOverride
+
+# Windows-specific files
+Desktop.ini
+$RECYCLE.BIN/
+
+# Build artifacts
+/build/
+*.build
+
+# Angular-specific
+.angular/cache
+.angular/server
+
+# Temporary and debug files
+*.bak
+*.swp
+*.temp
+*.pid
+*.seed
+*.gz
+
+# IntelliJ IDEA and WebStorm
+*.iml
+.idea/modules.xml
+.idea/*.iml
+.idea/workspace.xml
