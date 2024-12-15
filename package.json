@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:employee-management-system": "node dist/employee-management-system/server/server.mjs"
+    "serve:ssr": "node dist/employee-management-system/server/server.mjs",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
