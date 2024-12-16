@@ -28,7 +28,7 @@ pipeline {
         stage('Build Frontend') {
             steps {
                 echo 'Building the Angular application...'
-                sh 'ng build --prod'
+                sh 'ng build --configuration production'
             }
         }
 
