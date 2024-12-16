@@ -17,10 +17,10 @@ pipeline {
             steps {
                 echo 'Installing dependencies and Angular CLI...'
                 sh '''
-                curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-                apt-get install -y nodejs
-                npm install -g @angular/cli
-                npm install
+                    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+                    apt-get install -y nodejs
+                    npm install -g @angular/cli
+                    npm install
                 '''
             }
         }
@@ -36,8 +36,8 @@ pipeline {
             steps {
                 echo 'Dockerizing the Angular application...'
                 sh '''
-                docker build -t angular-app .
-                docker images
+                    docker build -t angular-app .
+                    docker images
                 '''
             }
         }
@@ -46,8 +46,8 @@ pipeline {
             steps {
                 echo 'Running the Docker container...'
                 sh '''
-                docker rm -f angular-app-container || true
-                docker run -d -p 8080:80 --name angular-app-container angular-app
+                    docker rm -f angular-app-container || true
+                    docker run -d -P --name angular-app-container angular-app
                 '''
             }
         }
@@ -56,7 +56,7 @@ pipeline {
             steps {
                 echo 'Verifying the deployment...'
                 sh '''
-                curl -I http://localhost:8080 || echo "App not reachable"
+                    curl -I http://localhost:8080 || echo "App not reachable"
                 '''
             }
         }
@@ -65,9 +65,7 @@ pipeline {
     post {
         always {
             echo 'Cleaning up Docker artifacts...'
-            sh '''
-            docker ps -a
-            '''
+            sh 'docker ps -a'
         }
         success {
             echo 'Build and deployment completed successfully!'
