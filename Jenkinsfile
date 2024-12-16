@@ -15,8 +15,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                echo 'Installing dependencies...'
-                sh 'npm install'
+                echo 'Installing dependencies and Angular CLI...'
+                sh '''
+                curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+                apt-get install -y nodejs
+                npm install -g @angular/cli
+                npm install
+                '''
             }
         }
 
