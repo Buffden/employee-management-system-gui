@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs 'NodeJS-18' // Use the Node.js version configured in Jenkins
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
@@ -9,19 +13,35 @@ pipeline {
             }
         }
 
-        stage('Build and Dockerize Frontend') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Building and Dockerizing Angular application...'
+                echo 'Installing dependencies...'
+                sh 'npm install'
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                echo 'Building the Angular application...'
+                sh 'ng build --prod'
+            }
+        }
+
+        stage('Dockerize Frontend') {
+            steps {
+                echo 'Dockerizing the Angular application...'
                 sh '''
                 docker build -t angular-app .
+                docker images
                 '''
             }
         }
 
-        stage('Run Container') {
+        stage('Deploy Application') {
             steps {
-                echo 'Running Docker container...'
+                echo 'Running the Docker container...'
                 sh '''
+                docker rm -f angular-app-container || true
                 docker run -d -p 8080:80 --name angular-app-container angular-app
                 '''
             }
@@ -39,10 +59,9 @@ pipeline {
 
     post {
         always {
-            echo 'Cleaning up Docker container...'
+            echo 'Cleaning up Docker artifacts...'
             sh '''
-            docker rm -f angular-app-container || true
-            docker rmi -f angular-app || true
+            docker ps -a
             '''
         }
         success {
