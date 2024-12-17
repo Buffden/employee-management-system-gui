@@ -48,6 +48,9 @@ pipeline {
                 sh '''
                     docker rm -f angular-app-container || true
                     docker run -d -P --name angular-app-container angular-app
+                    export APP_PORT=$(docker port angular-app-container 80 | cut -d: -f2)
+                    echo "App running on port $APP_PORT"
+                    echo $APP_PORT > app_port.txt
                 '''
             }
         }
@@ -56,7 +59,8 @@ pipeline {
             steps {
                 echo 'Verifying the deployment...'
                 sh '''
-                    curl -I http://localhost:8080 || echo "App not reachable"
+                    APP_PORT=$(cat app_port.txt)
+                    curl -I http://localhost:$APP_PORT || echo "App not reachable"
                 '''
             }
         }
