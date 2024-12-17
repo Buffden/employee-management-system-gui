@@ -1,5 +1,5 @@
 {
-  "name": "employee-management-system",
+  "name": "employee-management-system-gui",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr": "node dist/employee-management-system/server/server.mjs",
+    "serve:ssr": "node dist/employee-management-system-gui/server/server.mjs",
     "lint": "ng lint"
   },
   "private": true,

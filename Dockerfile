@@ -12,7 +12,7 @@ RUN npm run build
 
 # Use a lightweight server to serve the app
 FROM nginx:alpine
-COPY --from=build /app/dist/employee-management-system /usr/share/nginx/html
+COPY --from=build /app/dist/employee-management-system-gui /usr/share/nginx/html
 
 # Add a health check to monitor the app
 HEALTHCHECK --interval=30s --timeout=5s \
