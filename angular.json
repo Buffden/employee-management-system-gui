@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "employee-management-system": {
+    "employee-management-system-gui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/employee-management-system",
+            "outputPath": "dist/employee-management-system-gui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "employee-management-system:build:production"
+              "buildTarget": "employee-management-system-gui:build:production"
             },
             "development": {
-              "buildTarget": "employee-management-system:build:development"
+              "buildTarget": "employee-management-system-gui:build:development"
             }
           },
           "defaultConfiguration": "development"

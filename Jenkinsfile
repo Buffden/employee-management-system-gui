@@ -9,7 +9,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning the repository...'
-                git branch: 'main', url: 'https://github.com/Buffden/employee-management-system'
+                git branch: 'main', url: 'https://github.com/Buffden/employee-management-system-gui'
             }
         }
 
@@ -46,11 +46,14 @@ pipeline {
             steps {
                 echo 'Running the Docker container...'
                 sh '''
+                    # Create a Docker network if it doesn't exist
+                    docker network create ems-network || true
+
+                    # Remove the existing container if it exists
                     docker rm -f angular-app-container || true
-                    docker run -d -P --name angular-app-container angular-app
-                    export APP_PORT=$(docker port angular-app-container 80 | cut -d: -f2)
-                    echo "App running on port $APP_PORT"
-                    echo $APP_PORT > app_port.txt
+
+                    # Run the container in the created network
+                    docker run -d --network ems-network --name angular-app-container angular-app
                 '''
             }
         }
@@ -59,8 +62,8 @@ pipeline {
             steps {
                 echo 'Verifying the deployment...'
                 sh '''
-                    APP_PORT=$(cat app_port.txt)
-                    curl -I http://localhost:$APP_PORT || echo "App not reachable"
+                    # Use the container name to access the app within the Docker network
+                    curl -I http://angular-app-container:80 || echo "App not reachable"
                 '''
             }
         }
