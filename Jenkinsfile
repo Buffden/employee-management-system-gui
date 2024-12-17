@@ -50,17 +50,21 @@ pipeline {
             steps {
                 echo 'Running the Docker container...'
                 sh '''
-                    # Create a Docker network if it doesn't exist
-                    docker network create $DOCKER_NETWORK || true
+                    # Create Docker network if it doesn't exist
+                    docker network ls | grep $DOCKER_NETWORK || docker network create $DOCKER_NETWORK
 
                     # Remove the existing container if it exists
                     docker rm -f angular-app-container || true
 
-                    # Run the app container within the network
+                    # Run the application container in the Docker network
                     docker run -d --network $DOCKER_NETWORK --name angular-app-container angular-app
 
-                    # Connect the Jenkins container to the same network
-                    docker network connect $DOCKER_NETWORK $(hostname)
+                    # Check if Jenkins container is already connected to the network
+                    if ! docker network inspect $DOCKER_NETWORK | grep $(hostname); then
+                        docker network connect $DOCKER_NETWORK $(hostname)
+                    else
+                        echo "Jenkins container is already connected to the network."
+                    fi
                 '''
             }
         }
