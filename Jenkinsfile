@@ -5,6 +5,10 @@ pipeline {
         nodejs 'NodeJS-18' // Use the Node.js version configured in Jenkins
     }
 
+    environment {
+        DOCKER_NETWORK = 'ems-network' // Docker network name
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
@@ -47,13 +51,16 @@ pipeline {
                 echo 'Running the Docker container...'
                 sh '''
                     # Create a Docker network if it doesn't exist
-                    docker network create ems-network || true
+                    docker network create $DOCKER_NETWORK || true
 
                     # Remove the existing container if it exists
                     docker rm -f angular-app-container || true
 
-                    # Run the container in the created network
-                    docker run -d --network ems-network --name angular-app-container angular-app
+                    # Run the app container within the network
+                    docker run -d --network $DOCKER_NETWORK --name angular-app-container angular-app
+
+                    # Connect the Jenkins container to the same network
+                    docker network connect $DOCKER_NETWORK $(hostname)
                 '''
             }
         }
@@ -62,7 +69,7 @@ pipeline {
             steps {
                 echo 'Verifying the deployment...'
                 sh '''
-                    # Use the container name to access the app within the Docker network
+                    # Verify the app using its container name within the Docker network
                     curl -I http://angular-app-container:80 || echo "App not reachable"
                 '''
             }
