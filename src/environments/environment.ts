@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apibaseurl: 'http://localhost:8080', // Update to backend URL
+    apibaseurl: '/api', // Proxy route
 };
