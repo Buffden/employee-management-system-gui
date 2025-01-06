@@ -56,3 +56,22 @@
 .nav-links li a:hover {
   color: #00b4d8;
 }
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mat-icon {
+  font-size: 25px; /* Adjust the icon size */
+  position: inherit;
+}
+
+.profile-icon:hover .mat-icon {
+  color: #00b4d8; /* Highlight on hover */
+}
+
+.mat-icon.active {
+  color: #00b4d8; /* Highlight the active icon */
+}

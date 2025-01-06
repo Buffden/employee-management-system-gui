@@ -7,11 +7,17 @@
     </div>
     <ul class="nav-links">
       <li><a routerLink="/home"
-        routerLinkActive="active">Home</a></li>
+           routerLinkActive="active">Home</a></li>
       <li><a routerLink="/employees"
-        routerLinkActive="active">Employees</a></li>
+           routerLinkActive="active">Employees</a></li>
       <li><a routerLink="/departments"
-        routerLinkActive="active">Departments</a></li>
+           routerLinkActive="active">Departments</a></li>
     </ul>
+    <div mat-icon-button
+         class="profile-icon"
+         matTooltip="Profile">
+      <mat-icon routerLink="/profile"
+                routerLinkActive="active">account_circle</mat-icon>
+    </div>
   </nav>
 </header>
