@@ -30,6 +30,13 @@ export const routes: Routes = [
       ).then((m) => m.DepartmentListComponent),
   },
   {
+    path: 'profile',
+    loadComponent: () =>
+      import(
+        './features/profile/components/user-profile/user-profile.component'
+      ).then((m) => m.UserProfileComponent),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
