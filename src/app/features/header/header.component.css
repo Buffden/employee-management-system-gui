@@ -7,6 +7,9 @@
   color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: -10px -10px 10px -10px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -42,10 +45,12 @@
   font-size: 1rem;
   font-weight: 500;
   transition: color 0.3s;
+  cursor: pointer;
 }
 
 .nav-links li a.active {
   border-bottom: 2px solid #00b4d8;
+  color: #00b4d8; /* Change text color for active link */
 }
 
 .nav-links li a:hover {
