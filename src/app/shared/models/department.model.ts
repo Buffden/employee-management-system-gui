@@ -1,4 +1,6 @@
-export interface Department {
-    id: number;
-    name: string;
+import { TableData } from "./table";
+
+export interface Department extends TableData {
+    description: string;
+    totalEmployees: number;
 }

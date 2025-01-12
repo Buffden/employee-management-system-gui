@@ -1,7 +1,9 @@
-export interface Employee {
-    id: number;
-    name: string;
+import { Department } from "./department.model";
+import { TableData } from "./table";
+
+export interface Employee extends TableData {
     designation: string;
     salary: number;
-    department: string;
+    department: Department;
+    manager: Employee;
 }
