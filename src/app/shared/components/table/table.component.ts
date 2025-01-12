@@ -8,6 +8,7 @@ import { Employee } from '../../models/employee.model';
 import { Department } from '../../models/department.model';
 import { Column, TableConfig, TableData } from '../../models/table';
 import { defaultTableConfig } from './table.config';
+import { join } from 'path';
 
 export type TableCellData = Employee | Department | TableData;
 
@@ -57,6 +58,10 @@ export class TableComponent implements OnChanges {
         address: data.address,
         email: data.email,
         phone: data.phone,
+        department: 'department' in data ? data.department.name : undefined,
+        designation: 'designation' in data ? data.designation : undefined,
+        joiningDate: 'joiningDate' in data ? data.joiningDate : undefined,
+        manager: 'manager' in data ? data.manager : 'N/A',
       };
     });
     this.dataSource = new MatTableDataSource(genTableData);
