@@ -3,6 +3,11 @@ import { Employee } from "./employee.model";
 
 export type TableCellData = Employee | Department | TableData;
 
+export enum SortDirection {
+    ASC = 'asc',
+    DESC = 'desc',
+};
+
 export interface TableData {
     name: string;
     id: number;
@@ -12,6 +17,7 @@ export interface TableData {
 };
 
 export interface TableConfig {
+    tableTitle: string;
     columns?: Column[];
     pageSize?: number;
     pageSizeOptions?: number[];
@@ -22,4 +28,5 @@ export interface Column {
     header: string;
     type: string;
     sortable?: boolean;
+    sortDirection?: SortDirection;
 }
