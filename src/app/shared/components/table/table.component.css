@@ -9,3 +9,8 @@
 .mat-row:hover {
     background-color: #e0f7fa;
 }
+
+.table-title {
+    margin: 20px;
+    font-size: 24px;
+}

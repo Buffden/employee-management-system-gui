@@ -1,6 +1,7 @@
 import { TableConfig } from "../../../../shared/models/table";
 
 export const employeeListConfig: TableConfig = {
+    tableTitle: 'Employee List',
     columns: [
         { key: 'address', header: 'address', sortable: true, type: 'string' },
         { key: 'name', header: 'Employee Name', sortable: true, type: 'string' },
