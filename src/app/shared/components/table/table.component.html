@@ -10,7 +10,8 @@
                        matSort
                        class="mat-table">
                     <ng-container *ngFor="let col of tableConfig.columns"
-                                  [matColumnDef]="col.key">
+                                  [matColumnDef]="col.key"
+                                  [sticky]="isColSticky(col)">
                         <th mat-header-cell
                             *matHeaderCellDef
                             mat-sort-header>{{ col.header }}</th>

@@ -67,4 +67,9 @@ export class TableComponent implements OnChanges {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
+  isColSticky(column: Column): boolean {
+    const stickyColumns = this.tableConfig.columns?.filter((col: Column) => col.isSticky);
+    return stickyColumns?.includes(column) || false;
+  }
 }
