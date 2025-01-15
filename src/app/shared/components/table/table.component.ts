@@ -8,7 +8,6 @@ import { Employee } from '../../models/employee.model';
 import { Department } from '../../models/department.model';
 import { Column, TableConfig, TableData } from '../../models/table';
 import { defaultTableConfig } from './table.config';
-import { join } from 'path';
 
 export type TableCellData = Employee | Department | TableData;
 

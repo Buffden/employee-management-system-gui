@@ -1,7 +1,7 @@
 /* Card Container */
 .table-card {
-    margin: 16px;
-    padding: 20px;
+    /* margin: 16px;
+    padding: 20px; */
     background-color: #ffffff; /* White background for better contrast */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     border-radius: 8px; /* Rounded corners */
