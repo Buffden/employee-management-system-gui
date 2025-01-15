@@ -1,16 +1,74 @@
-.mat-table {
-    width: 100%;
-}
-
-.mat-header-row {
-    background-color: #f5f5f5;
-}
-
-.mat-row:hover {
-    background-color: #e0f7fa;
-}
-
-.table-title {
-    margin: 20px;
-    font-size: 24px;
-}
+/* Card Container */
+.table-card {
+    margin: 16px;
+    padding: 20px;
+    background-color: #ffffff; /* White background for better contrast */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Prevent content from spilling out */
+  }
+  
+  /* Generic Table Container */
+  .generic-table-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Table Header */
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10px;
+  }
+  
+  .table-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333333;
+    margin: 0;
+  }
+  
+  /* Table Wrapper */
+  .table-wrapper {
+    overflow-x: auto; /* Horizontal scrolling for smaller screens */
+    max-width: 100%; /* Ensure it fits within the card */
+  }
+  
+  /* Material Table */
+  .mat-table {
+    width: 100%; /* Ensure the table spans the available width */
+    padding: 10px;
+    border-collapse: collapse;
+  }
+  
+  .mat-header-row {
+    background-color: #002855; /* Dark blue background for header row */
+    color: white; /* White text for contrast */
+    font-weight: bold;
+  }
+  
+  .mat-row:hover {
+    background-color: #f9f9f9; /* Subtle hover effect */
+    cursor: pointer;
+  }
+  
+  /* Pagination */
+  mat-paginator {
+    border-radius: 4px;
+    padding: 8px;
+    display: flex;
+    justify-content: right;
+  }
+  
+  /* General Styling */
+  td, th {
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  th.mat-header-cell {
+    text-transform: uppercase; /* Capitalize headers */
+  }
+  
