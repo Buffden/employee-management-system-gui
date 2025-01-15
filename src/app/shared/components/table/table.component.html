@@ -1,37 +1,30 @@
-<div class="mat-elevation-z8">
-    <div class="table-title">
-        {{ tableConfig.tableTitle }}
+<mat-card class="table-card">
+    <div class="generic-table-container">
+        <div class="table-header">
+            <h2 class="table-title">{{ tableConfig.tableTitle }}</h2>
+        </div>
+        <div class="table-wrapper">
+            <table mat-table
+                   [dataSource]="dataSource"
+                   matSort
+                   class="mat-table">
+                <ng-container *ngFor="let col of tableConfig.columns"
+                              [matColumnDef]="col.key">
+                    <th mat-header-cell
+                        *matHeaderCellDef
+                        mat-sort-header>{{ col.header }}</th>
+                    <td mat-cell
+                        *matCellDef="let row">{{ row[col.key] }}</td>
+                </ng-container>
+                <tr mat-header-row
+                    *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row
+                    *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+        </div>
+        <mat-paginator [pageSize]="pageSize"
+                       [pageSizeOptions]="pageSizeOptions"
+                       aria-label="Select page">
+        </mat-paginator>
     </div>
-    <table mat-table
-           [dataSource]="dataSource"
-           matSort
-           class="mat-table">
-        <!-- Define Columns Dynamically -->
-        <ng-container *ngFor="let col of tableConfig.columns"
-                      [matColumnDef]="col.key">
-            <th mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header>
-                {{ col.header }}
-            </th>
-            <td mat-cell
-                *matCellDef="let row">
-                {{ row[col.key] }}
-            </td>
-        </ng-container>
-
-        <!-- Header Row -->
-        <tr mat-header-row
-            *matHeaderRowDef="displayedColumns"></tr>
-
-        <!-- Data Rows -->
-        <tr mat-row
-            *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-
-    <!-- Pagination -->
-    <mat-paginator [pageSize]="pageSize"
-                   [pageSizeOptions]="pageSizeOptions"
-                   aria-label="Select page">
-    </mat-paginator>
-</div>
+</mat-card>
