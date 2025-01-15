@@ -29,4 +29,5 @@ export interface Column {
     type: string;
     sortable?: boolean;
     sortDirection?: SortDirection;
+    isSticky?: boolean;
 }
