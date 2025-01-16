@@ -32,12 +32,17 @@ export interface Column {
     sortDirection?: SortDirection;
     isSticky?: boolean;
 }
-export type ColumnType = 'string' | 'number' | 'date' | 'actionButtons';
+export enum ColumnType {
+    STRING = 'string',
+    NUMBER = 'number',
+    DATE = 'date',
+    ACTION_BUTTONS = 'actionButtons',
+}
 
 export const ActionButtonObject: Column = {
     key: 'actions',
     header: 'Actions',
-    type: 'actionButtons',
+    type: ColumnType.ACTION_BUTTONS,
     sortable: false,
     isSticky: true,
 }
