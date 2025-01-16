@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Employee } from '../../models/employee.model';
 import { Department } from '../../models/department.model';
-import { Column, TableConfig, TableData } from '../../models/table';
+import { ActionButtonObject, Column, TableConfig, TableData } from '../../models/table';
 import { defaultTableConfig } from './table.config';
 
 export type TableCellData = Employee | Department | TableData;
@@ -42,9 +42,18 @@ export class TableComponent implements OnChanges {
   }
 
   handleTableConfig(config: TableConfig): void {
+    this.addActionColumn();
     this.displayedColumns = config.columns?.map((column: Column) => column.key) || [];
     this.pageSize = config.pageSize || 10;
     this.pageSizeOptions = config.pageSizeOptions ?? defaultTableConfig.pageSizeOptions ?? [];
+  }
+
+  addActionColumn() {
+    if (this.tableConfig?.displayActionButtons && this.tableConfig?.columns) {
+      if (!this.tableConfig.columns.some((col: Column) => col.type === 'actionButtons')) {
+        this.tableConfig.columns = [...this.tableConfig?.columns, ActionButtonObject];
+      }
+    }
   }
 
   handleTableDataChange(tabData: any): void {
@@ -71,5 +80,19 @@ export class TableComponent implements OnChanges {
   isColSticky(column: Column): boolean {
     const stickyColumns = this.tableConfig.columns?.filter((col: Column) => col.isSticky);
     return stickyColumns?.includes(column) || false;
+  }
+
+  // this method might need maintenance
+  getColClass(column: Column, index: number): string {
+    // Check for right sticky column
+    if (this.tableConfig.displayActionButtons && index === (this.tableConfig.columns?.length ?? 0) - 1) {
+      return 'sticky-column-right';
+    }
+    // Check for left sticky columns
+    if (column.isSticky) {
+      const stickyIndex = this.tableConfig.columns?.filter((col) => col.isSticky).indexOf(column) ?? -1;
+      return `sticky-column-left sticky-left-${stickyIndex}`;
+    }
+    return ''; // No sticky class for non-sticky columns
   }
 }
