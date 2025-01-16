@@ -8,6 +8,9 @@ import { Employee } from '../../models/employee.model';
 import { Department } from '../../models/department.model';
 import { ActionButtonObject, Column, TableConfig, TableData } from '../../models/table';
 import { defaultTableConfig } from './table.config';
+import { MatDialog } from '@angular/material/dialog';
+import { OverlayDialogComponent } from '../overlay-dialog/overlay-dialog.component';
+import { Router } from '@angular/router';
 
 export type TableCellData = Employee | Department | TableData;
 
@@ -29,7 +32,7 @@ export class TableComponent implements OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() { }
+  constructor(public matDialog: MatDialog, private router: Router) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['tableConfig']) {
@@ -94,5 +97,21 @@ export class TableComponent implements OnChanges {
       return `sticky-column-left sticky-left-${stickyIndex}`;
     }
     return ''; // No sticky class for non-sticky columns
+  }
+
+  onLinkClick(column: TableCellData): void {
+    const dialogRef = this.matDialog.open(OverlayDialogComponent, {
+      width: '850px',
+      data: column
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('afterClosed', result);
+    });
+    // we might implement a router navigation here
+  }
+
+  onActionClick(action: string, data: TableCellData): void {
+    // TBE: Implement action handling
+    console.log('action', action, data);
   }
 }
