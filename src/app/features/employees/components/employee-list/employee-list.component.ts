@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Employee } from '../../../../shared/models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
-import { SharedModule } from '../../../../shared/shared/shared.module';
+import { SharedModule } from '../../../../shared/shared.module';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { employeeListConfig } from './employee-list.config';
 
