@@ -15,4 +15,5 @@ export const employeeListConfig: TableConfig = {
     ],
     pageSize: 10,
     pageSizeOptions: [5, 10, 25, 50, 100],
+    displayActionButtons: true,
 };

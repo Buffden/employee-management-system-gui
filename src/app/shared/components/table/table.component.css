@@ -43,9 +43,11 @@
   }
   
   .mat-header-row {
-    background-color: #002855; /* Dark blue background for header row */
-    color: white; /* White text for contrast */
-    font-weight: bold;
+    background-color: #f5f5f5; /* Light gray background */
+    font-weight: bold; /* Bold text */
+    text-align: left; /* Align text to the left */
+    padding: 10px; /* Padding for spacing */
+    border-bottom: 1px solid #ddd; /* Bottom border */
   }
   
   .mat-row:hover {
@@ -72,3 +74,30 @@
     text-transform: uppercase; /* Capitalize headers */
   }
   
+  .sticky-column-left,
+  .sticky-column-right,
+  .sticky-left-0 {
+    position: sticky;
+    z-index: 1;
+    background-color: #f0f0f0; /* Change background color when sticky */
+  }
+  
+  .sticky-column-left {
+    left: 0;
+  }
+  
+  .sticky-column-right {
+    right: 0;
+  }
+  
+  .sticky-left-0 {
+    left: 0;
+  }
+  
+  /* Ensure the background color is applied to both header and body cells */
+  th.sticky-column-left,
+  td.sticky-column-left,
+  th.sticky-column-right,
+  td.sticky-column-right {
+    background-color: #f0f0f0; /* Change background color when sticky */
+  }

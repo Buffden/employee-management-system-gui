@@ -21,13 +21,23 @@ export interface TableConfig {
     columns?: Column[];
     pageSize?: number;
     pageSizeOptions?: number[];
+    displayActionButtons?: boolean;
 };
 
 export interface Column {
     key: string;
     header: string;
-    type: string;
+    type: ColumnType;
     sortable?: boolean;
     sortDirection?: SortDirection;
     isSticky?: boolean;
+}
+export type ColumnType = 'string' | 'number' | 'date' | 'actionButtons';
+
+export const ActionButtonObject: Column = {
+    key: 'actions',
+    header: 'Actions',
+    type: 'actionButtons',
+    sortable: false,
+    isSticky: true,
 }
