@@ -33,10 +33,12 @@ export interface Column {
     isSticky?: boolean;
 }
 export enum ColumnType {
-    STRING = 'string',
+    TEXT = 'text',
     NUMBER = 'number',
     DATE = 'date',
     ACTION_BUTTONS = 'actionButtons',
+    EMAIL = 'email',
+    LINK = 'link',
 }
 
 export const ActionButtonObject: Column = {

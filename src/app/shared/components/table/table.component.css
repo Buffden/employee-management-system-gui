@@ -101,3 +101,80 @@
   td.sticky-column-right {
     background-color: #f0f0f0; /* Change background color when sticky */
   }
+  /* Base styles for all table cells */
+.td-content {
+    padding: 8px 16px;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    color: #333;
+}
+
+/* Specific styles for data types */
+.td-number {
+    text-align: right;
+    color: #0d47a1; /* Blue color for numbers */
+}
+
+.td-email a {
+    color: #1a73e8; /* Standard link color */
+    text-decoration: none;
+}
+
+.td-email a:hover {
+    text-decoration: underline;
+}
+
+.td-date {
+    font-style: italic;
+    color: #6c757d; /* Muted color for dates */
+}
+
+.td-currency {
+    font-weight: bold;
+    color: #28a745; /* Green for currency */
+}
+
+.td-link a {
+    color: #007bff; /* Link blue */
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.td-link a:hover {
+    text-decoration: underline;
+}
+
+.td-actions button {
+    margin: 0 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.td-actions button:hover {
+    background-color: #0056b3;
+}
+
+/* Default styling */
+.td-default {
+    color: #dc3545; /* Red for unhandled cases */
+    font-style: italic;
+}
+
+/* Optional: Responsive tweaks */
+@media (max-width: 768px) {
+    .td-content {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .td-actions button {
+        font-size: 10px;
+    }
+}
