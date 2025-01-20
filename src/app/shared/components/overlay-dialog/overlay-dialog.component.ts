@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../../models/dialog';
+import { DialogData, overlayType } from '../../models/dialog';
 import { TableCellData } from '../table/table.component';
 import { SharedModule } from '../../shared.module';
 
@@ -11,8 +11,10 @@ import { SharedModule } from '../../shared.module';
   styleUrl: './overlay-dialog.component.css'
 })
 export class OverlayDialogComponent {
+  overlayType = overlayType;
   dialogData: DialogData = {
     title: 'Default Title',
+    viewController: overlayType.NODATA,
     content: {
       // initialize with properties of TableCellData
     } as TableCellData

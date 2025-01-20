@@ -1,3 +1,4 @@
+import { overlayType } from "../../../../shared/models/dialog";
 import { ColumnType, TableConfig } from "../../../../shared/models/table";
 
 export const departmentListConfig: TableConfig = {
@@ -12,4 +13,5 @@ export const departmentListConfig: TableConfig = {
     ],
     pageSize: 10,
     pageSizeOptions: [5, 10, 25, 50, 100],
+    viewController: overlayType.DISPLAYDEPARTMENT,
 };

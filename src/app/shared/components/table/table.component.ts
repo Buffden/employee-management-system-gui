@@ -105,6 +105,7 @@ export class TableComponent implements OnChanges {
       data: {
         title: this.tableConfig.detailsCardTitle,
         content: column,
+        viewController: this.tableConfig.viewController,
       }
     });
     dialogRef.afterClosed().subscribe(result => {

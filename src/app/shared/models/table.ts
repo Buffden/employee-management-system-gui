@@ -1,4 +1,5 @@
 import { Department } from "./department.model";
+import { overlayType } from "./dialog";
 import { Employee } from "./employee.model";
 
 export type TableCellData = Employee | Department | TableData;
@@ -24,6 +25,7 @@ export interface TableConfig {
     displayActionButtons?: boolean;
     detailsCardTitle: string;
     additionCardTitle: string;
+    viewController: overlayType;
 };
 
 export interface Column {

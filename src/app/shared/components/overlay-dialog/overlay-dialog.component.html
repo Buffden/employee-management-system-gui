@@ -1,60 +1,76 @@
 <div class="overlay-container">
     <!-- Main Content -->
-    <div class="overlay-content">
-        <!-- Left Column -->
-        <div class="content-column left-column">
-            <!-- Header Section -->
-            <div class="overlay-header">
-                <div class="profile-picture-placeholder"></div>
-                <!-- Department and Manager Section -->
-                <div class="details-section">
-                    <div class="detail-item">
-                        <div class="icon-placeholder department-icon"></div>
-                        <p class="detail-title">Department</p>
-                        <div class="stars-placeholder">⭐⭐⭐⭐⭐</div>
+    <div [ngSwitch]="dialogData.viewController">
+        <div class="td-content"
+             *ngSwitchCase="overlayType.DISPLAYEMPLOYEE">
+            <div class="overlay-content">
+                <!-- Left Column -->
+                <div class="content-column left-column">
+                    <!-- Header Section -->
+                    <div class="overlay-header">
+                        <div class="profile-picture-placeholder"></div>
+                        <!-- Department and Manager Section -->
+                        <div class="details-section">
+                            <div class="detail-item">
+                                <div class="icon-placeholder department-icon"></div>
+                                <p class="detail-title">Department</p>
+                                <div class="stars-placeholder">⭐⭐⭐⭐⭐</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="icon-placeholder manager-icon"></div>
+                                <p class="detail-title">Manager</p>
+                                <div class="stars-placeholder">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="detail-item">
-                        <div class="icon-placeholder manager-icon"></div>
-                        <p class="detail-title">Manager</p>
-                        <div class="stars-placeholder">⭐⭐⭐⭐⭐</div>
+                    <!-- Line Chart -->
+                    <div class="chart-placeholder line-chart-placeholder">
+                        <p>Line Chart Placeholder</p>
                     </div>
+
+
                 </div>
 
-            </div>
-            <!-- Line Chart -->
-            <div class="chart-placeholder line-chart-placeholder">
-                <p>Line Chart Placeholder</p>
-            </div>
+                <!-- Right Column -->
+                <div class="content-column right-column">
 
+                    <!-- Text Details -->
+                    <div class="text-details">
+                        <p class="text-placeholder">Placeholder Text 1</p>
+                        <p class="text-placeholder">Placeholder Text 2</p>
+                        <p class="text-placeholder">Placeholder Text 3</p>
+                        <p class="text-placeholder">Placeholder Text 4</p>
+                        <p class="text-placeholder">Placeholder Text 5</p>
+                        <p class="text-placeholder">Placeholder Text 6</p>
+                    </div>
+                    <!-- Pie Chart -->
+                    <div class="chart-placeholder pie-chart-placeholder">
+                        <p>Pie Chart Placeholder</p>
+                    </div>
 
+                    <!-- Bar Chart -->
+                    <div class="chart-placeholder bar-chart-placeholder">
+                        <p>Bar Chart Placeholder</p>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="td-content"
+             *ngSwitchCase="overlayType.DISPLAYDEPARTMENT">Department-Placeholders</div>
+        <div class="td-content"
+             *ngSwitchCase="overlayType.ADDEMPLOYEE">Add Employee Form</div>
+        <div class="td-content"
+             *ngSwitchCase="overlayType.ADDDEPARTMENT">Add Department Form</div>
+        <div class="td-content"
+             *ngSwitchCase="overlayType.EDITEMPLOYEE">Add Employee Form</div>
+        <div class="td-content"
+             *ngSwitchCase="overlayType.EDITDEPARTMENT">Add Department Form</div>
+        <div class="td-content"
+             *ngSwitchCase="overlayType.NODATA">NO-DATA-AVAILABLE-PLACEHOLDER</div>
 
-        <!-- Right Column -->
-        <div class="content-column right-column">
-
-            <!-- Text Details -->
-            <div class="text-details">
-                <p class="text-placeholder">Placeholder Text 1</p>
-                <p class="text-placeholder">Placeholder Text 2</p>
-                <p class="text-placeholder">Placeholder Text 3</p>
-                <p class="text-placeholder">Placeholder Text 4</p>
-                <p class="text-placeholder">Placeholder Text 5</p>
-                <p class="text-placeholder">Placeholder Text 6</p>
-            </div>
-            <!-- Pie Chart -->
-            <div class="chart-placeholder pie-chart-placeholder">
-                <p>Pie Chart Placeholder</p>
-            </div>
-
-            <!-- Bar Chart -->
-            <div class="chart-placeholder bar-chart-placeholder">
-                <p>Bar Chart Placeholder</p>
-            </div>
-
-            
-        </div>
     </div>
-
+    
     <!-- Footer Section -->
     <div class="overlay-footer">
         <button class="btn edit-btn">Edit</button>

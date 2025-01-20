@@ -1,9 +1,11 @@
+import { overlayType } from "../../models/dialog";
 import { ColumnType, TableConfig,  } from "../../models/table";
 
 // TBE later in feature as a feature
 
 export const defaultTableConfig: TableConfig = {
     tableTitle: 'Default Table Title',
+    viewController: overlayType.NODATA,
     detailsCardTitle: '',
     additionCardTitle: '',
     columns: [
