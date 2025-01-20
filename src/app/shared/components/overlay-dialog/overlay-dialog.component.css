@@ -1,0 +1,164 @@
+/* General Overlay Styling */
+.overlay-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Header Section */
+  .overlay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 20px;
+  }
+  
+  .profile-picture-placeholder {
+    width: 180px;
+    height: 180px;
+    background-color: #d9f2d9;
+    border-radius: 50%;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+  
+  /* Main Content Section */
+  .overlay-content {
+    display: flex;
+    gap: 16px;
+    flex-grow: 1;
+  }
+  
+  /* Left Column */
+  .left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .line-chart-placeholder {
+    /* flex: 1; */
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 200px;
+  }
+  
+  .details-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  .detail-item {
+    text-align: center;
+    flex: 1;
+  }
+  
+  .icon-placeholder {
+    width: 50px;
+    height: 50px;
+    background-color: #d9f2d9;
+    margin: 0 auto;
+    border-radius: 50%;
+  }
+  
+  .detail-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  
+  .stars-placeholder {
+    font-size: 16px;
+    color: #ffc107;
+  }
+  
+  /* Right Column */
+  .right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .pie-chart-placeholder,
+  .bar-chart-placeholder {
+    flex: 1;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .text-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .text-placeholder {
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    margin: 0;
+    text-align: center;
+    color: #999;
+    line-height: 20px;
+  }
+  
+  /* Footer Section */
+  .overlay-footer {
+    display: flex;
+    justify-content: end;
+    align-items: right;
+    margin-top: 16px;
+    gap: 16px;
+    border-top: 1px solid red;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .edit-btn {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .fire-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .fire-btn:hover {
+    background-color: #d32f2f;
+  }
+  

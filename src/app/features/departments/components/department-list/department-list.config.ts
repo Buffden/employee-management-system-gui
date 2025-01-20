@@ -1,6 +1,8 @@
 import { ColumnType, TableConfig } from "../../../../shared/models/table";
 
 export const departmentListConfig: TableConfig = {
+    detailsCardTitle: 'Employee Details',
+    additionCardTitle: 'Add Employee',
     tableTitle: 'Department List',
     columns: [
         { key: 'name', header: 'Department Name', sortable: true, type: ColumnType.LINK, isSticky: true },

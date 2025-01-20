@@ -102,7 +102,10 @@ export class TableComponent implements OnChanges {
   onLinkClick(column: TableCellData): void {
     const dialogRef = this.matDialog.open(OverlayDialogComponent, {
       width: '850px',
-      data: column
+      data: {
+        title: this.tableConfig.detailsCardTitle,
+        content: column,
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('afterClosed', result);

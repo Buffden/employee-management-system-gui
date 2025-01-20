@@ -22,6 +22,8 @@ export interface TableConfig {
     pageSize?: number;
     pageSizeOptions?: number[];
     displayActionButtons?: boolean;
+    detailsCardTitle: string;
+    additionCardTitle: string;
 };
 
 export interface Column {
