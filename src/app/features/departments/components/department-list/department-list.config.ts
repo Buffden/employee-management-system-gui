@@ -2,8 +2,8 @@ import { overlayType } from "../../../../shared/models/dialog";
 import { ColumnType, TableConfig } from "../../../../shared/models/table";
 
 export const departmentListConfig: TableConfig = {
-    detailsCardTitle: 'Employee Details',
-    additionCardTitle: 'Add Employee',
+    detailsCardTitle: 'Departments Details',
+    additionCardTitle: 'Add Department',
     tableTitle: 'Department List',
     columns: [
         { key: 'name', header: 'Department Name', sortable: true, type: ColumnType.LINK, isSticky: true },
