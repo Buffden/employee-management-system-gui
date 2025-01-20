@@ -1,4 +1,5 @@
-import { TableCellData } from "../components/table/table.component";
+import { TableCellData } from "./table";
+export type DisplayData = EmployeeDisplayData | DepartmentDisplayData;
 
 export enum overlayType {
     ADDEMPLOYEE = 'addEmployee',
@@ -15,4 +16,21 @@ export interface DialogData {
     title: string;
     content: TableCellData;
     viewController: overlayType;
+}
+
+export interface EmployeeDisplayData {
+    name: string;
+    id: number;
+    designation: string;
+    phone: string;
+    email: string;
+    joiningDate: string;
+    workLocation: string;
+}
+
+export interface DepartmentDisplayData {
+    id: number;
+    name: string;
+    location: string;
+    manager: string;
 }

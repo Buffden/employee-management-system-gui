@@ -1,4 +1,9 @@
+<div class="overlay-main-title-header">
+    <h2 class="overlay-title">{{dialogData.title}}</h2>
+</div>
 <div class="overlay-container">
+    <!-- Header -->
+
     <!-- Main Content -->
     <div [ngSwitch]="dialogData.viewController">
         <div class="td-content"
@@ -8,7 +13,20 @@
                 <div class="content-column left-column">
                     <!-- Header Section -->
                     <div class="overlay-header">
-                        <div class="profile-picture-placeholder"></div>
+                        <div class="photo-container">
+                            <div class="profile-picture-placeholder-container">
+                                <div class="profile-picture-placeholder">
+                                    <!-- Hover overlay -->
+                                    <div class="edit-overlay">
+                                        <i class="edit-icon"
+                                           (click)="triggerEdit()">✎</i>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
                         <!-- Department and Manager Section -->
                         <div class="details-section">
                             <div class="detail-item">
@@ -37,12 +55,12 @@
 
                     <!-- Text Details -->
                     <div class="text-details">
-                        <p class="text-placeholder">Placeholder Text 1</p>
-                        <p class="text-placeholder">Placeholder Text 2</p>
-                        <p class="text-placeholder">Placeholder Text 3</p>
-                        <p class="text-placeholder">Placeholder Text 4</p>
-                        <p class="text-placeholder">Placeholder Text 5</p>
-                        <p class="text-placeholder">Placeholder Text 6</p>
+                        <ng-container *ngFor="let field of textFields">
+                            <p class="text-placeholder">
+                                <span class="text-placeholder-key">{{ field.label }}:</span>
+                                &nbsp;{{ field.value }}
+                            </p>
+                        </ng-container>
                     </div>
                     <!-- Pie Chart -->
                     <div class="chart-placeholder pie-chart-placeholder">
@@ -69,11 +87,5 @@
         <div class="td-content"
              *ngSwitchCase="overlayType.NODATA">NO-DATA-AVAILABLE-PLACEHOLDER</div>
 
-    </div>
-    
-    <!-- Footer Section -->
-    <div class="overlay-footer">
-        <button class="btn edit-btn">Edit</button>
-        <button class="btn fire-btn">Fire</button>
     </div>
 </div>
