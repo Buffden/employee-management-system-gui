@@ -20,6 +20,12 @@
     align-items: center;
     padding-bottom: 10px;
     gap: 10px;
+    
+  }
+
+  .generic-buttons--no-data {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   .left-generic-buttons {
@@ -36,6 +42,14 @@
     align-items: center;
     padding: 20px 0px;
     gap: 10px;
+  }
+
+  .buttons {
+    padding: 5px 10px;
+    background-color: #F0F0F0;
+    border-color: white;
+    border-radius: 8px;
+    font-weight: 500;
   }
   /* Table Header */
   .table-header {
@@ -188,6 +202,13 @@
 .td-default {
     color: #dc3545; /* Red for unhandled cases */
     font-style: italic;
+}
+
+.no-data-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Optional: Responsive tweaks */

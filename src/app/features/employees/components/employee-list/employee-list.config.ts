@@ -27,5 +27,9 @@ export const employeeListConfig: TableConfig = {
     allowExport: true,
     allowAddButton: true,
     allowCustomize: true,
-    
+    noDataInfo: {
+        title: 'No Employee Data Found',
+        description: 'No data available for the selected criteria',
+        image: new URL('https://via.placeholder.com/150'),
+    }
 };

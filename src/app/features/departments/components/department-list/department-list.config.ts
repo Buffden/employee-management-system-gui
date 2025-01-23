@@ -21,4 +21,9 @@ export const departmentListConfig: TableConfig = {
     allowAddButton: true,
     allowCustomize: true,
     allowExport: true,
+    noDataInfo: {
+        title: 'No Department Data Found',
+        description: 'No data available for the selected criteria',
+        image: new URL('https://via.placeholder.com/150'),
+    }
 };

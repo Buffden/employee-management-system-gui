@@ -7,16 +7,21 @@
             <!--Enhancement: Shift to a dedicated component-->
             <div *ngIf="tableConfig.allowGenericButtons"
                  class="generic-buttons">
-                <div class="left-generic-buttons">
-                    <button *ngIf="tableConfig.allowCustomize">Customize Table**</button>
+                <div [ngClass]="{'left-generic-buttons': true, 'generic-buttons--no-data': noData()}">
+                    <button class="buttons"
+                            *ngIf="tableConfig.allowCustomize">Customize Table**</button>
                 </div>
                 <div class="right-generic-buttons">
-                    <button *ngIf="tableConfig.allowAddButton"
-                    (click)="onAddClick()">{{tableConfig.additionCardTitle}} + </button>
-                    <button *ngIf="tableConfig.allowExport">Export Table</button>
+                    <button class="buttons"
+                            *ngIf="tableConfig.allowAddButton"
+                            (click)="onAddClick()">{{tableConfig.additionCardTitle}} + </button>
+                    <button class="buttons"
+                            [ngClass]="{'generic-buttons--no-data': noData()}"
+                            *ngIf="tableConfig.allowExport">Export Table</button>
                 </div>
             </div>
-            <div class="table-wrapper">
+            <div *ngIf="!noData(); else noDataTemplate"
+                 class="table-wrapper">
                 <table mat-table
                        [dataSource]="dataSource"
                        matSort
@@ -30,6 +35,7 @@
                         <td mat-cell
                             *matCellDef="let row"
                             [ngClass]="getColClass(col, i)">
+
                             <ng-container [ngSwitch]="col.type">
                                 <!-- Text -->
                                 <span class="td-content"
@@ -92,9 +98,15 @@
             </div>
             <!--Enhancement: Shift to a dedicated component-->
             <mat-paginator [pageSize]="pageSize"
+                           *ngIf="!noData()"
                            [pageSizeOptions]="pageSizeOptions"
                            aria-label="Select page">
             </mat-paginator>
         </div>
     </mat-card-content>
 </mat-card>
+
+<ng-template class="no-data-container"
+             #noDataTemplate>
+    <app-no-data [noDataInfo]="tableConfig.noDataInfo"></app-no-data>
+</ng-template>
