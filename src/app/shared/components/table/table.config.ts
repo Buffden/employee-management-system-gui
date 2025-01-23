@@ -1,5 +1,5 @@
 import { overlayType } from "../../models/dialog";
-import { ColumnType, TableConfig,  } from "../../models/table";
+import { ColumnType, TableConfig, FormMode } from "../../models/table";
 
 // TBE later in feature as a feature
 
@@ -20,6 +20,7 @@ export const defaultTableConfig: TableConfig = {
     detailsCardTitle: "",
     additionCardTitle: "",
     editCardTitle: "",
+    mode: FormMode.VIEW,
     viewController: overlayType.NODATA,
     additionController: overlayType.NODATA,
     editController: overlayType.NODATA

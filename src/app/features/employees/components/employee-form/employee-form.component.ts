@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { SharedModule } from '../../../../shared/shared.module';
+import { DialogData } from '../../../../shared/models/dialog';
 
 @Component({
   selector: 'app-employee-form',
@@ -10,5 +11,5 @@ import { SharedModule } from '../../../../shared/shared.module';
   styleUrls: ['./employee-form.component.css']
 })
 export class EmployeeFormComponent {
-
+  @Input() employee: DialogData | undefined;
 }

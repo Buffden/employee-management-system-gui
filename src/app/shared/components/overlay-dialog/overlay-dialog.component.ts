@@ -7,6 +7,7 @@ import { DepartmentFormComponent } from '../../../features/departments/component
 import { EmployeeFormComponent } from '../../../features/employees/components/employee-form/employee-form.component';
 import { defaultTableConfig } from '../table/table.config';
 import { SampleDisplayData } from '../../consts/employee.consts';
+import { FormMode } from '../../models/table';
 
 @Component({
   selector: 'app-overlay-dialog',
@@ -51,6 +52,7 @@ export class OverlayDialogComponent {
 
   triggerEdit(): void {
     this.dialogClose();
+    this.dialogData.config.mode = FormMode.EDIT;
     console.log('Edit triggered', this.dialogData);
     this.dialogRef = this.matDialog.open(OverlayDialogComponent, {
       width: '850px',
