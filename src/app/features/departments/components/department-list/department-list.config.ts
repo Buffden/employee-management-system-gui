@@ -1,5 +1,5 @@
 import { overlayType } from "../../../../shared/models/dialog";
-import { ColumnType, TableConfig } from "../../../../shared/models/table";
+import { ColumnType, FormMode, TableConfig } from "../../../../shared/models/table";
 
 export const departmentListConfig: TableConfig = {
     detailsCardTitle: 'Departments Details',
@@ -25,5 +25,6 @@ export const departmentListConfig: TableConfig = {
         title: 'No Department Data Found',
         description: 'No data available for the selected criteria',
         image: new URL('https://via.placeholder.com/150'),
-    }
+    },
+    mode: FormMode.VIEW
 };

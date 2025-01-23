@@ -1,3 +1,5 @@
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <div class="overlay-main-title-header">
     <h2 class="overlay-title">{{dialogData.title}}</h2>
 </div>
@@ -144,17 +146,20 @@
         </div>
         <div class="td-content"
              *ngSwitchCase="overlayType.ADDEMPLOYEE">
-            <app-employee-form></app-employee-form>
+            <app-employee-form [employee]="dialogData"></app-employee-form>
         </div>
         <div class="td-content"
              *ngSwitchCase="overlayType.ADDDEPARTMENT">
-            <app-department-form></app-department-form>
+            <app-department-form [department]="dialogData"></app-department-form>
         </div>
         <div class="td-content"
-             *ngSwitchCase="overlayType.EDITEMPLOYEE">Edit Employee Form
+             *ngSwitchCase="overlayType.EDITEMPLOYEE">
+            <app-employee-form [employee]="dialogData"></app-employee-form>
         </div>
         <div class="td-content"
-             *ngSwitchCase="overlayType.EDITDEPARTMENT">Edit Department Form</div>
+             *ngSwitchCase="overlayType.EDITDEPARTMENT">
+            <app-department-form [department]="dialogData"></app-department-form>
+        </div>
         <div class="td-content"
              *ngSwitchCase="overlayType.NODATA">NO-DATA-AVAILABLE-PLACEHOLDER</div>
 

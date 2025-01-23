@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Employee } from '../../models/employee.model';
 import { Department } from '../../models/department.model';
-import { ActionButtonObject, Column, TableConfig, TableData } from '../../models/table';
+import { ActionButtonObject, Column, FormMode, TableConfig, TableData } from '../../models/table';
 import { defaultTableConfig } from './table.config';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { OverlayDialogComponent } from '../overlay-dialog/overlay-dialog.component';
@@ -125,12 +125,14 @@ export class TableComponent implements OnChanges {
 
   onAddClick(): void {
     this.dialogClose();
+    this.tableConfig.mode = FormMode.ADD;
     this.dialogRef = this.matDialog.open(OverlayDialogComponent, {
       width: '850px',
       data: {
         title: this.tableConfig.additionCardTitle,
         content: {},
         viewController: this.tableConfig.additionController,
+        config: this.tableConfig
       }
     });
     this.dialogRef.afterClosed().subscribe(result => {

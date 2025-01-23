@@ -4,6 +4,12 @@ import { Employee } from "./employee.model";
 
 export type TableCellData = Employee | Department | TableData;
 
+export enum FormMode {
+    ADD = 'add',
+    EDIT = 'edit',
+    VIEW = 'view',
+}
+
 export enum SortDirection {
     ASC = 'asc',
     DESC = 'desc',
@@ -34,6 +40,7 @@ export interface TableConfig {
     allowAddButton?: boolean;
     allowCustomize?: boolean;
     noDataInfo: NoDataInfo;
+    mode: FormMode;
 };
 
 export interface Column {
