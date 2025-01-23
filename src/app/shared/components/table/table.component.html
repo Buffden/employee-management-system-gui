@@ -4,6 +4,7 @@
             <div class="table-header">
                 <h2 class="table-title">{{ tableConfig.tableTitle }}</h2>
             </div>
+            <!--Enhancement: Shift to a dedicated component-->
             <div *ngIf="tableConfig.allowGenericButtons"
                  class="generic-buttons">
                 <div class="left-generic-buttons">
@@ -89,6 +90,7 @@
                         *matRowDef="let row; columns: displayedColumns"></tr>
                 </table>
             </div>
+            <!--Enhancement: Shift to a dedicated component-->
             <mat-paginator [pageSize]="pageSize"
                            [pageSizeOptions]="pageSizeOptions"
                            aria-label="Select page">
