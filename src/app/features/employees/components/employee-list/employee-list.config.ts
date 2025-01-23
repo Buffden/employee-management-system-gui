@@ -5,6 +5,7 @@ export const employeeListConfig: TableConfig = {
     tableTitle: 'Employee List',
     detailsCardTitle: 'Employee Details',
     additionCardTitle: 'Add Employee',
+    editCardTitle: 'Edit Employee',
     columns: [
         { key: 'name', header: 'Employee Name', sortable: true, type: ColumnType.LINK, isSticky: true },
         { key: 'department', header: 'Department', sortable: false, type: ColumnType.TEXT },
@@ -20,4 +21,11 @@ export const employeeListConfig: TableConfig = {
     pageSizeOptions: [5, 10, 25, 50, 100],
     displayActionButtons: true,
     viewController: overlayType.DISPLAYEMPLOYEE,
+    additionController: overlayType.ADDEMPLOYEE,
+    editController: overlayType.EDITEMPLOYEE,
+    allowGenericButtons: true,
+    allowExport: true,
+    allowAddButton: true,
+    allowCustomize: true,
+    
 };

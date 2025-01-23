@@ -14,6 +14,29 @@
     flex-direction: column;
   }
   
+  .generic-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    gap: 10px;
+  }
+
+  .left-generic-buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 0px;
+    gap: 10px;
+  }
+
+  .right-generic-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px 0px;
+    gap: 10px;
+  }
   /* Table Header */
   .table-header {
     display: flex;

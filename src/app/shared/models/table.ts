@@ -25,7 +25,14 @@ export interface TableConfig {
     displayActionButtons?: boolean;
     detailsCardTitle: string;
     additionCardTitle: string;
+    editCardTitle: string;
     viewController: overlayType;
+    additionController: overlayType;
+    editController: overlayType;
+    allowGenericButtons?: boolean;
+    allowExport?: boolean;
+    allowAddButton?: boolean;
+    allowCustomize?: boolean;
 };
 
 export interface Column {

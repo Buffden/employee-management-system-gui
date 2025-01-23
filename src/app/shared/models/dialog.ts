@@ -1,4 +1,4 @@
-import { TableCellData } from "./table";
+import { TableCellData, TableConfig } from "./table";
 export type DisplayData = EmployeeDisplayData | DepartmentDisplayData;
 
 export enum overlayType {
@@ -16,6 +16,7 @@ export interface DialogData {
     title: string;
     content: TableCellData;
     viewController: overlayType;
+    config: TableConfig;
 }
 
 export interface EmployeeDisplayData {

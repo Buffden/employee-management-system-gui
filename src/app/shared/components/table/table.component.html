@@ -4,6 +4,17 @@
             <div class="table-header">
                 <h2 class="table-title">{{ tableConfig.tableTitle }}</h2>
             </div>
+            <div *ngIf="tableConfig.allowGenericButtons"
+                 class="generic-buttons">
+                <div class="left-generic-buttons">
+                    <button *ngIf="tableConfig.allowCustomize">Customize Table**</button>
+                </div>
+                <div class="right-generic-buttons">
+                    <button *ngIf="tableConfig.allowAddButton"
+                    (click)="onAddClick()">{{tableConfig.additionCardTitle}} + </button>
+                    <button *ngIf="tableConfig.allowExport">Export Table</button>
+                </div>
+            </div>
             <div class="table-wrapper">
                 <table mat-table
                        [dataSource]="dataSource"
