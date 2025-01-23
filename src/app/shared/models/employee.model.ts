@@ -6,5 +6,4 @@ export interface Employee extends TableData {
     salary: number;
     department: Department;
     manager: Employee;
-    workLocation: string;
 }

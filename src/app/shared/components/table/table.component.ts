@@ -3,18 +3,21 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ActionButtonObject, Column, TableCellData, TableConfig } from '../../models/table';
+import { Employee } from '../../models/employee.model';
+import { Department } from '../../models/department.model';
+import { ActionButtonObject, Column, TableConfig, TableData } from '../../models/table';
 import { defaultTableConfig } from './table.config';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { OverlayDialogComponent } from '../overlay-dialog/overlay-dialog.component';
-import { Router } from '@angular/router';
 import { SharedModule } from '../../shared.module';
+import { NoDataComponent } from '../no-data/no-data.component';
+import { Router } from '@angular/router';
 
+export type TableCellData = Employee | Department | TableData;
 
-export type { TableCellData };
 @Component({
   selector: 'app-table',
-  imports: [MatTableModule, CommonModule, SharedModule],
+  imports: [MatTableModule, CommonModule, SharedModule, NoDataComponent],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'
 })
@@ -23,8 +26,8 @@ export class TableComponent implements OnChanges {
   @Input() tableConfig: TableConfig = defaultTableConfig;
 
   displayedColumns: string[] = [];
-  dataSource!: MatTableDataSource<any>;
-  pageSize: number = 0;
+  dataSource!: MatTableDataSource<TableCellData>;
+  pageSize = 0;
   pageSizeOptions: number[] = [];
   dialogRef: MatDialogRef<OverlayDialogComponent> | undefined;
 
@@ -53,12 +56,12 @@ export class TableComponent implements OnChanges {
   addActionColumn() {
     if (this.tableConfig?.displayActionButtons && this.tableConfig?.columns) {
       if (!this.tableConfig.columns.some((col: Column) => col.type === 'actionButtons')) {
-        this.tableConfig.columns = [...this.tableConfig?.columns, ActionButtonObject];
+        this.tableConfig.columns = [...(this.tableConfig.columns ?? []), ActionButtonObject];
       }
     }
   }
 
-  handleTableDataChange(tabData: any): void {
+  handleTableDataChange(tabData: TableCellData[]): void {
     const genTableData = tabData.map((data: TableCellData) => {
       return {
         id: data.id,
@@ -74,7 +77,7 @@ export class TableComponent implements OnChanges {
         manager: 'manager' in data ? data.manager : 'N/A',
       };
     });
-    this.dataSource = new MatTableDataSource(genTableData);
+    this.dataSource = new MatTableDataSource<TableCellData>(genTableData);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -139,5 +142,9 @@ export class TableComponent implements OnChanges {
     if (this.dialogRef) {
       this.dialogRef.close();
     }
+  }
+
+  noData(): boolean {
+    return !this.dataSource?.data?.length;
   }
 }

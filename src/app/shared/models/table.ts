@@ -33,6 +33,7 @@ export interface TableConfig {
     allowExport?: boolean;
     allowAddButton?: boolean;
     allowCustomize?: boolean;
+    noDataInfo: NoDataInfo;
 };
 
 export interface Column {
@@ -58,4 +59,10 @@ export const ActionButtonObject: Column = {
     type: ColumnType.ACTION_BUTTONS,
     sortable: false,
     isSticky: true,
+}
+
+export interface NoDataInfo {
+    title: string;
+    description: string;
+    image: URL;
 }

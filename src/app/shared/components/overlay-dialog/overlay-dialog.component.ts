@@ -5,6 +5,8 @@ import { TableCellData } from '../table/table.component';
 import { SharedModule } from '../../shared.module';
 import { DepartmentFormComponent } from '../../../features/departments/components/department-form/department-form.component';
 import { EmployeeFormComponent } from '../../../features/employees/components/employee-form/employee-form.component';
+import { defaultTableConfig } from '../table/table.config';
+import { SampleDisplayData } from '../../consts/employee.consts';
 
 @Component({
   selector: 'app-overlay-dialog',
@@ -18,18 +20,8 @@ export class OverlayDialogComponent {
   dialogData: DialogData = {
     title: 'Default Title',
     viewController: overlayType.NODATA,
-    config: {
-      tableTitle: '',
-      detailsCardTitle: '',
-      additionCardTitle: '',
-      viewController: overlayType.NODATA,
-      editCardTitle: '',
-      additionController: overlayType.NODATA,
-      editController: overlayType.NODATA
-    },
-    content: {
-      // initialize with properties of TableCellData
-    } as TableCellData
+    config: defaultTableConfig,
+    content: {} as TableCellData
   };
 
   constructor(public dialogRef: MatDialogRef<OverlayDialogComponent>,
@@ -41,16 +33,8 @@ export class OverlayDialogComponent {
   }
 
   getFilteredTextFields(): { label: string, value: string | number }[] {
-    const sampleEmployeeData: EmployeeDisplayData = {
-      name: '',
-      id: 0,
-      designation: '',
-      phone: '',
-      email: '',
-      joiningDate: '',
-      workLocation: '',
-    };
-    return Object.keys(sampleEmployeeData).map((key: string) => {
+    const sampleDisplayData: EmployeeDisplayData = SampleDisplayData;
+    return Object.keys(sampleDisplayData).map((key: string) => {
       return { label: key.toUpperCase(), value: this.dialogData.content[key as keyof TableCellData] || 'NA' };
     });
   }
