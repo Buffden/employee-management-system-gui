@@ -1,4 +1,5 @@
 import { Department } from "./department.model";
+import { overlayType } from "./dialog";
 import { Employee } from "./employee.model";
 
 export type TableCellData = Employee | Department | TableData;
@@ -22,6 +23,16 @@ export interface TableConfig {
     pageSize?: number;
     pageSizeOptions?: number[];
     displayActionButtons?: boolean;
+    detailsCardTitle: string;
+    additionCardTitle: string;
+    editCardTitle: string;
+    viewController: overlayType;
+    additionController: overlayType;
+    editController: overlayType;
+    allowGenericButtons?: boolean;
+    allowExport?: boolean;
+    allowAddButton?: boolean;
+    allowCustomize?: boolean;
 };
 
 export interface Column {

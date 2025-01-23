@@ -1,19 +1,17 @@
 import { Component, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../shared.module';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Employee } from '../../models/employee.model';
-import { Department } from '../../models/department.model';
-import { ActionButtonObject, Column, TableConfig, TableData } from '../../models/table';
+import { ActionButtonObject, Column, TableCellData, TableConfig } from '../../models/table';
 import { defaultTableConfig } from './table.config';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { OverlayDialogComponent } from '../overlay-dialog/overlay-dialog.component';
 import { Router } from '@angular/router';
+import { SharedModule } from '../../shared.module';
 
-export type TableCellData = Employee | Department | TableData;
 
+export type { TableCellData };
 @Component({
   selector: 'app-table',
   imports: [MatTableModule, CommonModule, SharedModule],
@@ -28,6 +26,7 @@ export class TableComponent implements OnChanges {
   dataSource!: MatTableDataSource<any>;
   pageSize: number = 0;
   pageSizeOptions: number[] = [];
+  dialogRef: MatDialogRef<OverlayDialogComponent> | undefined;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -100,12 +99,18 @@ export class TableComponent implements OnChanges {
   }
 
   onLinkClick(column: TableCellData): void {
-    const dialogRef = this.matDialog.open(OverlayDialogComponent, {
+    this.dialogClose();
+    this.dialogRef = this.matDialog.open(OverlayDialogComponent, {
       width: '850px',
-      data: column
+      data: {
+        title: this.tableConfig.detailsCardTitle,
+        content: column,
+        viewController: this.tableConfig.viewController,
+        config: this.tableConfig
+      }
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('afterClosed', result);
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('table component link afterClosed', result);
     });
     // we might implement a router navigation here
   }
@@ -113,5 +118,26 @@ export class TableComponent implements OnChanges {
   onActionClick(action: string, data: TableCellData): void {
     // TBE: Implement action handling
     console.log('action', action, data);
+  }
+
+  onAddClick(): void {
+    this.dialogClose();
+    this.dialogRef = this.matDialog.open(OverlayDialogComponent, {
+      width: '850px',
+      data: {
+        title: this.tableConfig.additionCardTitle,
+        content: {},
+        viewController: this.tableConfig.additionController,
+      }
+    });
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log('table component addclick afterClosed', result);
+    });
+  }
+
+  dialogClose(): void {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 }
