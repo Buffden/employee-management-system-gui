@@ -146,7 +146,8 @@
         </div>
         <div class="td-content"
              *ngSwitchCase="overlayType.ADDEMPLOYEE">
-            <app-employee-form [employee]="dialogData"></app-employee-form>
+            <app-employee-form [employee]="dialogData"
+                               (employeeResponse)="employeeFormResponse($event)"></app-employee-form>
         </div>
         <div class="td-content"
              *ngSwitchCase="overlayType.ADDDEPARTMENT">

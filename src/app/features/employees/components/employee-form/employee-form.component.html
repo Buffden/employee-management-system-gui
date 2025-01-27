@@ -1,2 +1,99 @@
-<p>employee-form works!</p>
-<p> - {{employee?.config?.mode}}</p>
+<div class="form-container">
+    <form [formGroup]="employeeForm"
+          (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput
+                   formControlName="name"
+                   placeholder="Enter name"
+                   required />
+            <mat-error *ngIf="employeeForm.controls['name'].invalid && employeeForm.controls['name'].touched">
+                Name is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput
+                   formControlName="email"
+                   type="email"
+                   placeholder="Enter email"
+                   required />
+            <mat-error *ngIf="employeeForm.controls['email'].invalid && employeeForm.controls['email'].touched">
+                Valid email is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input matInput
+                   formControlName="address"
+                   placeholder="Enter address"
+                   required />
+            <mat-error *ngIf="employeeForm.controls['address'].invalid && employeeForm.controls['address'].touched">
+                Address is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput
+                   formControlName="phone"
+                   placeholder="Enter phone"
+                   required />
+            <mat-error *ngIf="employeeForm.controls['phone'].invalid && employeeForm.controls['phone'].touched">
+                Phone is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Department</mat-label>
+            <input matInput
+                   formControlName="department"
+                   placeholder="Enter department"
+                   required />
+            <mat-error
+                       *ngIf="employeeForm.controls['department'].invalid && employeeForm.controls['department'].touched">
+                Department is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Designation</mat-label>
+            <input matInput
+                   formControlName="designation"
+                   placeholder="Enter Designation"
+                   required />
+            <mat-error
+                       *ngIf="employeeForm.controls['designation'].invalid && employeeForm.controls['designation'].touched">
+                Designation is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Manager</mat-label>
+            <input matInput
+                   formControlName="manager"
+                   placeholder="Enter Manager Details"
+                   required />
+            <mat-error
+                       *ngIf="employeeForm.controls['manager'].invalid && employeeForm.controls['manager'].touched">
+                Manager name is required.
+            </mat-error>
+        </mat-form-field>
+
+        <div class="form-actions">
+            <button mat-raised-button
+                    color="primary"
+                    type="submit"
+                    (click)="dialogClose()"
+                    [disabled]="isSubmitDisabled()">
+                {{ submitButtonText() }}
+            </button>
+            <button mat-raised-button
+                    color="warn"
+                    type="button"
+                    (click)="dialogClose()">Cancel</button>
+        </div>
+    </form>
+</div>

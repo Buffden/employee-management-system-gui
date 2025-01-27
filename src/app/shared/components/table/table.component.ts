@@ -27,8 +27,8 @@ export class TableComponent implements OnChanges {
 
   displayedColumns: string[] = [];
   dataSource!: MatTableDataSource<TableCellData>;
-  pageSize = 0;
-  pageSizeOptions: number[] = [];
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 50];
   dialogRef: MatDialogRef<OverlayDialogComponent> | undefined;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -51,6 +51,7 @@ export class TableComponent implements OnChanges {
     this.displayedColumns = config.columns?.map((column: Column) => column.key) || [];
     this.pageSize = config.pageSize || 10;
     this.pageSizeOptions = config.pageSizeOptions ?? defaultTableConfig.pageSizeOptions ?? [];
+    console.log('page size', this.pageSize, this.pageSizeOptions);
   }
 
   addActionColumn() {
