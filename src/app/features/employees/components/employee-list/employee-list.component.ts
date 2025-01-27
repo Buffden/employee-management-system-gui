@@ -21,7 +21,7 @@ export class EmployeeListComponent implements OnInit {
   constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
-    this.employeeService.getEmployees().subscribe((employees: any) => {
+    this.employeeService.getEmployees().subscribe((employees) => {
       this.employees = employees;
       console.log("Raw response:", employees);
     });

@@ -68,4 +68,9 @@ export class OverlayDialogComponent {
       this.updateTableData();
     });
   }
+
+  employeeFormResponse(response: DialogData): void {
+    console.log('employeeFormResponse', response);
+    this.dialogClose();
+  }
 }
