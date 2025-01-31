@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DialogData, EmployeeDisplayData, overlayType } from '../../models/dialog';
 import { TableCellData } from '../table/table.component';
@@ -44,9 +44,9 @@ export class OverlayDialogComponent {
     console.log('Update table data triggered');
   }
 
-  dialogClose(): void {
+  dialogClose(response?: DialogData): void {
     if (this.dialogRef) {
-      this.dialogRef.close();
+      this.dialogRef.close(response);
     }
   }
 
@@ -70,7 +70,6 @@ export class OverlayDialogComponent {
   }
 
   employeeFormResponse(response: DialogData): void {
-    console.log('employeeFormResponse', response);
-    this.dialogClose();
+    this.dialogClose(response);
   }
 }

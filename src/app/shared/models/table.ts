@@ -1,6 +1,6 @@
 import { Department } from "./department.model";
 import { overlayType } from "./dialog";
-import { Employee } from "./employee.model";
+import { Employee, EmployeeFormField } from "./employee.model";
 
 export type TableCellData = Employee | Department | TableData;
 
@@ -25,7 +25,7 @@ export interface TableData {
 
 export interface TableConfig {
     tableTitle: string;
-    columns?: Column[];
+    columns: Column[];
     pageSize?: number;
     pageSizeOptions?: number[];
     displayActionButtons?: boolean;
@@ -50,6 +50,7 @@ export interface Column {
     sortable?: boolean;
     sortDirection?: SortDirection;
     isSticky?: boolean;
+    formField?: EmployeeFormField;
 }
 export enum ColumnType {
     TEXT = 'text',
