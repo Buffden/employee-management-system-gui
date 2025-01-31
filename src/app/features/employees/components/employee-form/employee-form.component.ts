@@ -4,6 +4,7 @@ import { SharedModule } from '../../../../shared/shared.module';
 import { DialogData } from '../../../../shared/models/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormMode } from '../../../../shared/models/table';
+import { EmployeeFormField } from '../../../../shared/models/employee.model';
 
 @Component({
   selector: 'app-employee-form',
@@ -16,6 +17,7 @@ export class EmployeeFormComponent implements OnInit {
   @Input() employee: DialogData | undefined;
   @Output() employeeResponse: EventEmitter<DialogData> = new EventEmitter<DialogData>();
 
+  FormFields: EmployeeFormField[] = [];
   initialFormValues = {};
   mode: FormMode = FormMode.ADD;
   employeeForm = new FormGroup({
@@ -40,6 +42,7 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   initForm() {
+    this.FormFields = this.createFormFields();
     this.employeeForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -89,21 +92,28 @@ export class EmployeeFormComponent implements OnInit {
   }
 
   isSubmitDisabled(): boolean {
-    console.log('isSubmitDisabled log', this.employeeForm.value);
     if (this.mode === 'add') {
       return this.employeeForm.invalid;
     } else if (this.mode === 'edit') {
       return (
         this.employeeForm.invalid ||
         JSON.stringify(this.initialFormValues) ===
-          JSON.stringify(this.employeeForm.getRawValue())
+        JSON.stringify(this.employeeForm.getRawValue())
       );
     }
     return true;
   }
 
+  isFieldInvalid(field: EmployeeFormField): boolean {
+    return (this.employeeForm.get(field.formControlName)?.invalid && this.employeeForm.get(field.formControlName)?.touched) || false;
+  }
+
   dialogClose() {
     console.log('dialog close');
     this.employeeResponse.emit({} as DialogData);
+  }
+
+  createFormFields(): EmployeeFormField[] {
+    return this.employee?.config.columns?.map((column) => column.formField).filter((field): field is EmployeeFormField => field !== undefined) || [];
   }
 }

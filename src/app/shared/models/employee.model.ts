@@ -7,3 +7,10 @@ export interface Employee extends TableData {
     department: Department;
     manager: Employee;
 }
+
+export interface EmployeeFormField {
+    label: string;
+    formControlName: string;
+    placeholder: string;
+    errorMessage: string;
+}
