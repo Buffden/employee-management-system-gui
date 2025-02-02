@@ -7,8 +7,23 @@ export const departmentListConfig: TableConfig = {
     tableTitle: 'Department List',
     editCardTitle: 'Edit Department',
     columns: [
-        { key: 'name', header: 'Department Name', sortable: true, type: ColumnType.LINK, isSticky: true },
-        { key: 'description', header: 'Description', sortable: false, type: ColumnType.TEXT },
+        {
+            key: 'name', header: 'Department Name', sortable: true, type: ColumnType.LINK, isSticky: true,
+            formField: {
+                label: 'Name',
+                formControlName: 'name',
+                placeholder: 'Enter name',
+                errorMessage: 'Name is required'
+            }
+        },
+        { key: 'description', header: 'Description', sortable: false, type: ColumnType.TEXT,
+            formField: {
+                label: 'Description',
+                formControlName: 'description',
+                placeholder: 'Enter description',
+                errorMessage: 'Description is required'
+            },
+         },
         { key: 'id', header: 'ID', sortable: true, type: ColumnType.TEXT },
         { key: 'totalEmployees', header: 'Total Employees', sortable: true, type: ColumnType.NUMBER },
     ],

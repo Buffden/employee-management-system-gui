@@ -4,3 +4,10 @@ export interface Department extends TableData {
     description: string;
     totalEmployees: number;
 }
+
+export interface DepartmentFormField {
+    label: string;
+    formControlName: string;
+    placeholder: string;
+    errorMessage: string;
+}

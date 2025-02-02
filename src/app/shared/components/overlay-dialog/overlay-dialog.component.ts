@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { DialogData, EmployeeDisplayData, overlayType } from '../../models/dialog';
 import { TableCellData } from '../table/table.component';
@@ -71,6 +71,10 @@ export class OverlayDialogComponent {
   }
 
   employeeFormResponse(response: DialogData): void {
+    this.dialogClose(response);
+  }
+
+  departmentFormResponse(response: DialogData): void {
     this.dialogClose(response);
   }
 
