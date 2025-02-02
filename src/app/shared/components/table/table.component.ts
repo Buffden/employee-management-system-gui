@@ -12,6 +12,9 @@ import { OverlayDialogComponent } from '../overlay-dialog/overlay-dialog.compone
 import { SharedModule } from '../../shared.module';
 import { NoDataComponent } from '../no-data/no-data.component';
 import { Router } from '@angular/router';
+import { filter } from 'rxjs';
+import { EmployeeService } from '../../../features/employees/services/employee.service';
+import { DialogData } from '../../models/dialog';
 
 export type TableCellData = Employee | Department | TableData;
 
@@ -34,7 +37,10 @@ export class TableComponent implements OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public matDialog: MatDialog, private router: Router) { }
+  constructor(
+    public matDialog: MatDialog,
+    private router: Router,
+    private employeeService: EmployeeService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['tableConfig']) {
@@ -72,7 +78,8 @@ export class TableComponent implements OnChanges {
         address: data.address,
         email: data.email,
         phone: data.phone,
-        department: 'department' in data ? data.department.name : undefined,
+        salary: 'salary' in data ? data.salary : undefined,
+        department: 'department' in data ? data.department : undefined,
         designation: 'designation' in data ? data.designation : undefined,
         joiningDate: 'joiningDate' in data ? data.joiningDate : undefined,
         manager: 'manager' in data ? data.manager : 'N/A',
@@ -136,8 +143,13 @@ export class TableComponent implements OnChanges {
         config: this.tableConfig
       }
     });
-    this.dialogRef.afterClosed().subscribe(result => {
-      console.log('table component addclick afterClosed', result);
+    this.dialogRef.afterClosed().pipe(filter(result => !!result)).subscribe((isClosedWithData: DialogData) => {
+      console.log('isClosedWithData', isClosedWithData);
+      const reqData = {...isClosedWithData.content, salary: Number(isClosedWithData.content.phone)};
+      console.log('reqData', reqData);
+      this.employeeService.addEmployee(isClosedWithData.content as Employee).subscribe((response: Employee) => {
+        console.log('Employee added:', response);
+      });
     });
   }
 

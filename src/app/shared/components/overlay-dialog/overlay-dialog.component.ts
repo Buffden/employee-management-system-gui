@@ -8,6 +8,7 @@ import { EmployeeFormComponent } from '../../../features/employees/components/em
 import { defaultTableConfig } from '../table/table.config';
 import { SampleDisplayData } from '../../consts/employee.consts';
 import { FormMode } from '../../models/table';
+import { Employee } from '../../models/employee.model';
 
 @Component({
   selector: 'app-overlay-dialog',
@@ -71,5 +72,9 @@ export class OverlayDialogComponent {
 
   employeeFormResponse(response: DialogData): void {
     this.dialogClose(response);
+  }
+
+  getDepartmentName(): string {
+    return (this.dialogData.content as Employee).department?.name || 'NA';
   }
 }
