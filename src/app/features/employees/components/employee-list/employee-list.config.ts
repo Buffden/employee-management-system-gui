@@ -17,7 +17,7 @@ export const employeeListConfig: TableConfig = {
             }
         },
         {
-            key: 'department', header: 'Department', sortable: false, type: ColumnType.TEXT,
+            key: 'department', header: 'Department', sortable: false, type: ColumnType.DEPARTMENT,
             formField: {
                 label: 'Department',
                 formControlName: 'department',
@@ -59,6 +59,15 @@ export const employeeListConfig: TableConfig = {
                 formControlName: 'manager',
                 placeholder: 'Enter Manager',
                 errorMessage: 'Manager is required'
+            },
+        },
+        {
+            key: 'salary', header: 'Salary', sortable: true, type: ColumnType.NUMBER,
+            formField: {
+                label: 'Salary',
+                formControlName: 'salary',
+                placeholder: 'Enter salary',
+                errorMessage: 'Salary is required'
             },
         },
         { key: 'id', header: 'ID', sortable: true, type: ColumnType.NUMBER },

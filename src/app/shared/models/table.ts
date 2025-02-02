@@ -59,6 +59,7 @@ export enum ColumnType {
     ACTION_BUTTONS = 'actionButtons',
     EMAIL = 'email',
     LINK = 'link',
+    DEPARTMENT = 'department',
 }
 
 export const ActionButtonObject: Column = {

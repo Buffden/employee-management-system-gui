@@ -57,6 +57,10 @@
                                     {{ row[col.key] | date: 'shortDate' }}
                                 </span>
 
+                                <!-- department -->
+                                <span class="td-content td-department"
+                                      *ngSwitchCase="'department'">{{ row[col.key].name }}</span>
+
                                 <!-- Currency -->
                                 <span class="td-content td-currency"
                                       *ngSwitchCase="'currency'">

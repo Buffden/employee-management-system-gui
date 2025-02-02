@@ -28,6 +28,7 @@ export class EmployeeFormComponent implements OnInit {
     designation: new FormControl(''),
     phone: new FormControl(''),
     manager: new FormControl(''),
+    salary: new FormControl(0),
   });
 
   constructor(
@@ -51,6 +52,7 @@ export class EmployeeFormComponent implements OnInit {
       designation: ['', Validators.required],
       phone: ['', Validators.required],
       manager: ['', Validators.required],
+      salary: [0, Validators.required],
     });
   }
 
@@ -59,10 +61,11 @@ export class EmployeeFormComponent implements OnInit {
       name: employee.content.name,
       email: employee.content.email,
       address: employee.content.address,
-      department: 'department' in employee.content ? String(employee.content.department) : undefined,
+      department: 'department' in employee.content ? String(employee.content.department.name) : undefined,
       designation: 'designation' in employee.content ? String(employee.content.designation) : undefined,
       phone: employee.content.phone,
       manager: 'manager' in employee.content ? String(employee.content.manager) : ' ',
+      salary: 'salary' in employee.content ? employee.content.salary : 0,
     });
     this.initialFormValues = this.employeeForm.getRawValue();
   }
