@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { Department } from "../../../shared/models/department.model";
@@ -14,7 +14,7 @@ export class DepartmentService {
     constructor(private http: HttpClient) { }
 
     // Generic error handler for HTTP requests
-    private handleError(error: any): void {
+    private handleError(error: HttpErrorResponse): void {
         console.error('API Error: ', error); // Log for debugging
         // Optionally, handle the error with a user-friendly message
     }

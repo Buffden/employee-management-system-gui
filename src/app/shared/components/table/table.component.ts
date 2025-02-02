@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { EmployeeService } from '../../../features/employees/services/employee.service';
 import { DialogData } from '../../models/dialog';
+import { DepartmentService } from '../../../features/departments/services/department.service';
 
 export type TableCellData = Employee | Department | TableData;
 
@@ -40,6 +41,7 @@ export class TableComponent implements OnChanges {
   constructor(
     public matDialog: MatDialog,
     private router: Router,
+    private departmentService: DepartmentService,
     private employeeService: EmployeeService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -145,11 +147,20 @@ export class TableComponent implements OnChanges {
     });
     this.dialogRef.afterClosed().pipe(filter(result => !!result)).subscribe((isClosedWithData: DialogData) => {
       console.log('isClosedWithData', isClosedWithData);
-      const reqData = {...isClosedWithData.content, salary: Number(isClosedWithData.content.phone)};
-      console.log('reqData', reqData);
-      this.employeeService.addEmployee(isClosedWithData.content as Employee).subscribe((response: Employee) => {
-        console.log('Employee added:', response);
-      });
+
+      if (this.tableConfig.additionCardTitle === 'Add Department') {
+        this.departmentService.addDepartment(isClosedWithData.content as Department).subscribe((response: Department) => {
+          console.log('Department added:', response);
+        });
+      }
+      else {
+        const reqData = { ...isClosedWithData.content, salary: Number(isClosedWithData.content.phone) };
+        console.log('reqData', reqData);
+        this.employeeService.addEmployee(isClosedWithData.content as Employee).subscribe((response: Employee) => {
+          console.log('Employee added:', response);
+        });
+      }
+
     });
   }
 
