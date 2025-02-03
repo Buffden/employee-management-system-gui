@@ -3,7 +3,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { Employee } from '../../models/employee.model';
+import { DepartmentID, Employee, EmployeeRequest } from '../../models/employee.model';
 import { Department } from '../../models/department.model';
 import { ActionButtonObject, Column, FormMode, TableConfig, TableData } from '../../models/table';
 import { defaultTableConfig } from './table.config';
@@ -154,9 +154,8 @@ export class TableComponent implements OnChanges {
         });
       }
       else {
-        const reqData = { ...isClosedWithData.content, salary: Number(isClosedWithData.content.phone) };
-        console.log('reqData', reqData);
-        this.employeeService.addEmployee(isClosedWithData.content as Employee).subscribe((response: Employee) => {
+        const employeeReq = this.prepareEmployeeRequestData(isClosedWithData);
+        this.employeeService.addEmployee(employeeReq).subscribe((response: Employee) => {
           console.log('Employee added:', response);
         });
       }
@@ -167,6 +166,26 @@ export class TableComponent implements OnChanges {
   dialogClose(): void {
     if (this.dialogRef) {
       this.dialogRef.close();
+    }
+  }
+
+  prepareEmployeeRequestData(isClosedWithData: DialogData): EmployeeRequest {
+    const reqData = { ...isClosedWithData.content, salary: Number(isClosedWithData.content.phone) };
+    const departmentID: DepartmentID = {
+      id: (reqData as Employee).department
+    }
+    const managerID = {
+      id: (reqData as Employee).manager
+    }
+    return {
+      name: reqData.name,
+      address: reqData.address,
+      email: reqData.email,
+      designation: (reqData as Employee).designation,
+      salary: reqData.salary,
+      department: departmentID,
+      manager: managerID,
+      phone: reqData.phone
     }
   }
 

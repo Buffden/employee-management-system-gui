@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Employee } from "../../../shared/models/employee.model";
+import { Employee, EmployeeRequest } from "../../../shared/models/employee.model";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../../environments/environment";
 
@@ -40,7 +40,7 @@ export class EmployeeService {
     }
 
     // POST (add) a new employee
-    addEmployee(employee: Employee): Observable<Employee> {
+    addEmployee(employee: EmployeeRequest): Observable<Employee> {
         return this.http.post<Employee>(this.apiUrl, employee).pipe(
             catchError((error) => {
                 this.handleError(error);
