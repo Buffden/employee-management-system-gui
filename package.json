@@ -2,13 +2,13 @@
   "name": "employee-management-system-gui",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --configuration production",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr": "node dist/employee-management-system-gui/server/server.mjs",
-    "lint": "ng lint"
+  "ng": "ng",
+  "start": "ng serve --proxy-config proxy.conf.json",
+  "start:dev": "ng serve --configuration=development --proxy-config proxy.conf.json",
+  "watch": "ng build --watch --configuration=development",
+  "test": "ng test",
+  "lint": "ng lint",
+  "clean": "rm -rf dist && echo 'Cleaned old build files!'"
   },
   "private": true,
   "dependencies": {
