@@ -5,12 +5,13 @@ import { TableComponent } from '../../../../shared/components/table/table.compon
 import { TableCellData } from '../../../../shared/models/table';
 import { DepartmentService } from '../../services/department.service';
 import { departmentListConfig } from './department-list.config';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-department-list',
   standalone: true,
   imports: [CommonModule, SharedModule, TableComponent],
-  providers: [DepartmentService],
+  providers: [DepartmentService, HttpClient],
   templateUrl: './department-list.component.html',
   styleUrls: ['./department-list.component.css'],
 })

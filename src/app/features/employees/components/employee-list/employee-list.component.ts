@@ -5,12 +5,13 @@ import { EmployeeService } from '../../services/employee.service';
 import { SharedModule } from '../../../../shared/shared.module';
 import { TableComponent } from '../../../../shared/components/table/table.component';
 import { employeeListConfig } from './employee-list.config';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-employee-list',
   standalone: true,
   imports: [CommonModule, SharedModule, TableComponent],
-  providers: [EmployeeService],
+  providers: [EmployeeService, HttpClient],
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.css'],
 })
