@@ -39,11 +39,11 @@
                             <ng-container [ngSwitch]="col.type">
                                 <!-- Text -->
                                 <span class="td-content"
-                                      *ngSwitchCase="'text'">{{ row[col.key] }}</span>
+                                      *ngSwitchCase="'text'">{{ row[col.key] !== null && row[col.key] !== undefined && row[col.key] !== '' ? row[col.key] : '-' }}</span>
 
                                 <!-- Number -->
                                 <span class="td-content td-number"
-                                      *ngSwitchCase="'number'">{{ row[col.key] }}</span>
+                                      *ngSwitchCase="'number'">{{ row[col.key] !== null && row[col.key] !== undefined && row[col.key] !== '' ? row[col.key] : '-' }}</span>
 
                                 <!-- Email -->
                                 <span class="td-content td-email"
@@ -87,7 +87,7 @@
                                 <!-- Default -->
                                 <span class="td-content td-default"
                                       *ngSwitchDefault>
-                                    {{ row[col.key] }}
+                                    {{ row[col.key] !== null && row[col.key] !== undefined && row[col.key] !== '' ? row[col.key] : '-' }}
                                 </span>
                             </ng-container>
 

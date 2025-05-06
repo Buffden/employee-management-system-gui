@@ -80,7 +80,68 @@ export const employeeListConfig: TableConfig = {
                 placeholder: 'Enter address',
                 errorMessage: 'Address is required'
             },
-        }
+        },
+        {
+            key: 'employmentType', header: 'Employment Type', sortable: true, type: ColumnType.TEXT,
+            formField: {
+                label: 'Employment Type',
+                formControlName: 'employmentType',
+                placeholder: 'Select employment type',
+                errorMessage: 'Employment type is required',
+                type: 'select',
+                options: ['Full-Time', 'Part-Time', 'Contractor', 'Intern'],
+            },
+        },
+        {
+            key: 'workLocation', header: 'Work Location', sortable: true, type: ColumnType.TEXT,
+            formField: {
+                label: 'Work Location',
+                formControlName: 'workLocation',
+                placeholder: 'Enter work location',
+                errorMessage: 'Work location is required',
+                type: 'text',
+            },
+        },
+        {
+            key: 'experienceYears', header: 'Experience (Years)', sortable: true, type: ColumnType.NUMBER,
+            formField: {
+                label: 'Experience Years',
+                formControlName: 'experienceYears',
+                placeholder: 'Enter years of experience',
+                errorMessage: 'Experience years is required',
+                type: 'number',
+            },
+        },
+        {
+            key: 'performanceRating', header: 'Performance Rating', sortable: true, type: ColumnType.NUMBER,
+            formField: {
+                label: 'Performance Rating',
+                formControlName: 'performanceRating',
+                placeholder: 'Enter performance rating',
+                errorMessage: 'Performance rating is required',
+                type: 'number',
+            },
+        },
+        {
+            key: 'lastAppraisalDate', header: 'Last Appraisal Date', sortable: true, type: ColumnType.DATE,
+            formField: {
+                label: 'Last Appraisal Date',
+                formControlName: 'lastAppraisalDate',
+                placeholder: 'Select last appraisal date',
+                errorMessage: 'Last appraisal date is required',
+                type: 'date',
+            },
+        },
+        {
+            key: 'isActive', header: 'Active', sortable: true, type: ColumnType.TEXT,
+            formField: {
+                label: 'Is Active',
+                formControlName: 'isActive',
+                placeholder: '',
+                errorMessage: '',
+                type: 'checkbox',
+            },
+        },
     ],
     pageSize: 10,
     pageSizeOptions: [5, 10, 25, 50, 100],

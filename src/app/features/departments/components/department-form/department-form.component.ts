@@ -22,7 +22,12 @@ export class DepartmentFormComponent implements OnInit {
   mode: FormMode = FormMode.ADD;
   departmentForm = new FormGroup({
     name: new FormControl(''),
-    description: new FormControl('')
+    description: new FormControl(''),
+    location: new FormControl(''),
+    budget: new FormControl(null as number | null),
+    budgetUtilization: new FormControl(null as number | null),
+    performanceMetric: new FormControl(null as number | null),
+    head: new FormControl(''),
   });
 
   constructor(
@@ -41,13 +46,24 @@ export class DepartmentFormComponent implements OnInit {
     this.departmentForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      location: [''],
+      budget: [null as number | null],
+      budgetUtilization: [null as number | null],
+      performanceMetric: [null as number | null],
+      head: [''],
     });
   }
 
   loadDepartmentDetails(department: DialogData) {
+    const content = department.content as Department;
     this.departmentForm?.patchValue({
-      name: department.content.name,
-      description: (department.content as Department).description
+      name: content.name,
+      description: content.description,
+      location: content.location,
+      budget: content.budget ?? null,
+      budgetUtilization: content.budgetUtilization ?? null,
+      performanceMetric: content.performanceMetric ?? null,
+      head: content.head ? String(content.head.id) : '',
     });
     this.initialFormValues = this.departmentForm.getRawValue();
   }
@@ -61,15 +77,27 @@ export class DepartmentFormComponent implements OnInit {
   }
 
   addDepartment() {
-    const departmentData = this.departmentForm!.value;
-    console.log('Adding department:', departmentData);
+    let departmentData = this.departmentForm!.value;
+    departmentData = {
+      ...departmentData,
+      budget: typeof departmentData.budget === 'string' && departmentData.budget !== '' ? Number(departmentData.budget) : departmentData.budget,
+      budgetUtilization: typeof departmentData.budgetUtilization === 'string' && departmentData.budgetUtilization !== '' ? Number(departmentData.budgetUtilization) : departmentData.budgetUtilization,
+      performanceMetric: typeof departmentData.performanceMetric === 'string' && departmentData.performanceMetric !== '' ? Number(departmentData.performanceMetric) : departmentData.performanceMetric,
+      head: departmentData.head === '' || departmentData.head === 'null' ? null : departmentData.head
+    };
     this.departmentResponse.emit({ content: departmentData } as DialogData);
   }
 
   updateDepartment(department: DialogData) {
-    console.log('Updating department:', department);
-    const departmentData = this.departmentForm!.value;
-    console.log('Updating department:', departmentData);
+    let departmentData = this.departmentForm!.value;
+    departmentData = {
+      ...departmentData,
+      budget: typeof departmentData.budget === 'string' && departmentData.budget !== '' ? Number(departmentData.budget) : departmentData.budget,
+      budgetUtilization: typeof departmentData.budgetUtilization === 'string' && departmentData.budgetUtilization !== '' ? Number(departmentData.budgetUtilization) : departmentData.budgetUtilization,
+      performanceMetric: typeof departmentData.performanceMetric === 'string' && departmentData.performanceMetric !== '' ? Number(departmentData.performanceMetric) : departmentData.performanceMetric,
+      head: departmentData.head === '' || departmentData.head === 'null' ? null : departmentData.head
+    };
+    this.departmentResponse.emit({ content: departmentData } as DialogData);
   }
 
   submitButtonText() {
