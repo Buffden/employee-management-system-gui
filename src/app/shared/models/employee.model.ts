@@ -6,6 +6,12 @@ export interface Employee extends TableData {
     salary: number;
     department: Department;
     manager: Employee;
+    employmentType?: string;
+    workLocation?: string;
+    experienceYears?: number;
+    performanceRating?: number;
+    lastAppraisalDate?: string;
+    isActive?: boolean;
 }
 
 export interface EmployeeFormField {
@@ -13,6 +19,8 @@ export interface EmployeeFormField {
     formControlName: string;
     placeholder: string;
     errorMessage: string;
+    type?: string;
+    options?: string[];
 }
 
 export interface EmployeeRequest {
@@ -20,10 +28,16 @@ export interface EmployeeRequest {
     designation: string;
     salary: number;
     department: DepartmentID;
-    manager: ManagerID;
+    manager: ManagerID | null;
     phone: string;
     address: string;
     email: string;
+    employmentType?: string;
+    workLocation?: string;
+    experienceYears?: number;
+    performanceRating?: number;
+    lastAppraisalDate?: string;
+    isActive?: boolean;
 }
 
 export interface ManagerID {
