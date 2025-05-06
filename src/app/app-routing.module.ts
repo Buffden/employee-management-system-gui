@@ -2,12 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
+  // landing page route to home with full path match
   {
     path: '',
-    loadComponent: () =>
-      import('./features/home/components/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
-      ),
+    redirectTo: 'home',
+    pathMatch: 'full'
   },
   {
     path: 'home',
@@ -31,8 +30,15 @@ export const routes: Routes = [
       ).then((m) => m.DepartmentListComponent),
   },
   {
+    path: 'profile',
+    loadComponent: () =>
+      import(
+        './features/profile/components/user-profile/user-profile.component'
+      ).then((m) => m.UserProfileComponent),
+  },
+  {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'home',
   },
 ];
 
