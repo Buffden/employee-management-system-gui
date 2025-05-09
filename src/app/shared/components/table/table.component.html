@@ -59,7 +59,9 @@
 
                                 <!-- department -->
                                 <span class="td-content td-department"
-                                      *ngSwitchCase="'department'">{{ row[col.key].name }}</span>
+                                      *ngSwitchCase="'department'">
+                                    {{ (row[col.key]?.firstName || row[col.key]?.lastName) ? (row[col.key]?.firstName + ' ' + row[col.key]?.lastName) : '-' }}
+                                </span>
 
                                 <!-- Currency -->
                                 <span class="td-content td-currency"

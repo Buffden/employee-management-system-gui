@@ -1,15 +1,14 @@
-import { TableData } from "./table";
-import { Employee } from "./employee.model";
-
-export interface Department extends TableData {
+export interface Department {
+    id: string;
+    name: string;
     description: string;
-    totalEmployees: number;
-    id: number;
-    location?: string;
-    budget?: number;
-    budgetUtilization?: number;
-    performanceMetric?: number;
-    head?: Employee | null;
+    locationName: string;
+    locationId: string;
+    createdAt: string;
+    budget: number;
+    budgetUtilization: number;
+    performanceMetric: number;
+    departmentHeadId: string | null;
 }
 
 export interface DepartmentFormField {

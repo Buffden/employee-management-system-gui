@@ -37,6 +37,13 @@ export const routes: Routes = [
       ).then((m) => m.UserProfileComponent),
   },
   {
+    path: 'projects',
+    loadComponent: () =>
+      import('./features/projects/components/project-list/project-list.component').then(
+        (m) => m.ProjectListComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
