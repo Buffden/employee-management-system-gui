@@ -3,7 +3,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { DepartmentID, Employee, EmployeeRequest } from '../../models/employee.model';
+import { DepartmentID, Employee, EmployeeRequest, ManagerID } from '../../models/employee.model';
 import { Department } from '../../models/department.model';
 import { ActionButtonObject, Column, FormMode, TableConfig, TableData } from '../../models/table';
 import { defaultTableConfig } from './table.config';
@@ -72,20 +72,22 @@ export class TableComponent implements OnChanges {
 
   handleTableDataChange(tabData: TableCellData[]): void {
     const genTableData = tabData.map((data: TableCellData) => {
-      return {
-        id: data.id,
-        name: data.name,
-        description: 'description' in data ? data.description : undefined,
-        totalEmployees: 'totalEmployees' in data ? data.totalEmployees : undefined,
-        address: data.address,
-        email: data.email,
-        phone: data.phone,
-        salary: 'salary' in data ? data.salary : undefined,
-        department: 'department' in data ? data.department : undefined,
-        designation: 'designation' in data ? data.designation : undefined,
-        joiningDate: 'joiningDate' in data ? data.joiningDate : undefined,
-        manager: 'manager' in data ? data.manager : 'N/A',
-      };
+      if ('firstName' in data && 'lastName' in data) {
+        // Employee
+        return {
+          ...data,
+          name: data.firstName + ' ' + data.lastName,
+        };
+      } else if ('name' in data) {
+        // Department
+        return {
+          ...data,
+          name: data.name,
+        };
+      } else {
+        // Fallback for other types
+        return data;
+      }
     });
     this.dataSource = new MatTableDataSource<TableCellData>(genTableData);
     this.dataSource.paginator = this.paginator;
@@ -170,23 +172,24 @@ export class TableComponent implements OnChanges {
   }
 
   prepareEmployeeRequestData(isClosedWithData: DialogData): EmployeeRequest {
-    const reqData = { ...isClosedWithData.content, salary: Number(isClosedWithData.content.phone) };
-    const departmentID: DepartmentID = {
-      id: (reqData as Employee).department
+    const reqData = { ...isClosedWithData.content };
+    // Type guard: only proceed if reqData has employee-specific fields
+    if ('phone' in reqData && 'firstName' in reqData && 'lastName' in reqData && 'departmentId' in reqData && 'managerId' in reqData) {
+      // Use type assertions to satisfy DepartmentID and ManagerID recursive types
+      const departmentID = { id: reqData.departmentId } as unknown as DepartmentID;
+      const managerID = reqData.managerId ? ({ id: reqData.managerId } as unknown as ManagerID) : null;
+      return {
+        name: reqData.firstName + ' ' + reqData.lastName,
+        address: reqData.address,
+        email: reqData.email,
+        designation: reqData.designation,
+        salary: reqData.salary,
+        department: departmentID,
+        manager: managerID,
+        phone: reqData.phone
+      };
     }
-    const managerID = {
-      id: (reqData as Employee).manager
-    }
-    return {
-      name: reqData.name,
-      address: reqData.address,
-      email: reqData.email,
-      designation: (reqData as Employee).designation,
-      salary: reqData.salary,
-      department: departmentID,
-      manager: managerID,
-      phone: reqData.phone
-    }
+    throw new Error('Invalid employee data');
   }
 
   noData(): boolean {

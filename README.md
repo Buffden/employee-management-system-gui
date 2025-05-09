@@ -6,6 +6,152 @@
 - **Runtime**: Node.js (latest LTS)
 - **Dev Server**: Angular CLI (ng serve)
 
+### 📊 Frontend Data Models
+
+#### Core Interfaces
+
+1. **Employee**
+   ```typescript
+   interface Employee {
+     id: string;
+     firstName: string;
+     lastName: string;
+     email: string;
+     phone: string;
+     address: string;
+     designation: string;
+     salary: number;
+     joiningDate: string;
+     locationId: string;
+     performanceRating: number;
+     managerId: string | null;
+     departmentId: string;
+     workLocation: string;
+     experienceYears: number;
+   }
+   ```
+
+2. **Department**
+   ```typescript
+   interface Department {
+     id: string;
+     name: string;
+     description: string;
+     locationId: string;
+     createdAt: string;
+     budget: number;
+     budgetUtilization: number;
+     performanceMetric: number;
+     departmentHeadId: string;
+     locationName: string;
+     totalEmployees: number;
+   }
+   ```
+
+3. **Location**
+   ```typescript
+   interface Location {
+     id: string;
+     name: string;
+     address: string;
+     city: string;
+     state: string;
+     country: string;
+     postalCode: string;
+   }
+   ```
+
+4. **Project**
+   ```typescript
+   interface Project {
+     id: string;
+     name: string;
+     description: string;
+     startDate: string;
+     endDate: string;
+     status: string;
+     budget: number;
+     departmentId: string;
+     projectManagerId: string;
+   }
+   ```
+
+5. **EmployeeProject**
+   ```typescript
+   interface EmployeeProject {
+     employeeId: string;
+     projectId: string;
+     role: string;
+     assignedDate: string;
+   }
+   ```
+
+6. **Task**
+   ```typescript
+   interface Task {
+     id: string;
+     name: string;
+     description: string;
+     status: string;
+     priority: string;
+     startDate: string;
+     dueDate: string;
+     completedDate: string;
+     projectId: string;
+     assignedToId: string;
+   }
+   ```
+
+#### Data Model Relationships
+
+```mermaid
+erDiagram
+    Employee ||--o{ Employee : "manages"
+    Employee ||--o{ Task : "assigned to"
+    Employee }o--|| Department : "belongs to"
+    Employee }o--|| Location : "works at"
+    Department ||--o{ Employee : "has"
+    Department ||--o{ Project : "owns"
+    Department }o--|| Location : "located at"
+    Department }o--|| Employee : "headed by"
+    Project ||--o{ Task : "contains"
+    Project }o--|| Department : "belongs to"
+    Project }o--|| Employee : "managed by"
+    Employee }o--o{ Project : "works on"
+    Location ||--o{ Department : "hosts"
+    Location ||--o{ Employee : "employs"
+```
+
+#### Key Features
+- Type-safe interfaces for all entities
+- Proper null handling for optional fields
+- Consistent ID types (string for UUID)
+- Date fields as ISO strings for easy serialization
+- Denormalized fields for performance (e.g., `locationName` in Department)
+- Clear separation between entity and DTO types
+- Proper handling of self-referential relationships (Employee management)
+
+#### Type Guards and Utilities
+```typescript
+// Type guard for Employee
+function isEmployee(value: unknown): value is Employee {
+  return typeof value === 'object' && value !== null &&
+    'firstName' in value && 'lastName' in value;
+}
+
+// Type guard for Department
+function isDepartment(value: unknown): value is Department {
+  return typeof value === 'object' && value !== null &&
+    'name' in value && 'locationId' in value;
+}
+
+// Type guard for Project
+function isProject(value: unknown): value is Project {
+  return typeof value === 'object' && value !== null &&
+    'name' in value && 'departmentId' in value;
+}
+```
+
 ---
 
 ### 🚀 Local Development Setup
