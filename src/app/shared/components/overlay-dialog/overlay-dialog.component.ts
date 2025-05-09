@@ -79,6 +79,6 @@ export class OverlayDialogComponent {
   }
 
   getDepartmentName(): string {
-    return (this.dialogData.content as Employee).department?.name || 'NA';
+    return (this.dialogData.content as Employee).departmentId || 'NA';
   }
 }

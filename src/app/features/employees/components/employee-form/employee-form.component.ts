@@ -76,20 +76,19 @@ export class EmployeeFormComponent implements OnInit {
   loadEmployeeDetails(employee: DialogData) {
     const content = employee.content as Employee;
     this.employeeForm?.patchValue({
-      name: content.name,
+      name: content.firstName + ' ' + content.lastName,
       email: content.email,
       address: content.address,
-      department: 'department' in content ? String(content.department.name) : undefined,
+      department: 'department' in content && typeof content.department === 'object' && content.department !== null ? String((content.department as { name?: string }).name) : undefined,
       designation: 'designation' in content ? String(content.designation) : undefined,
       phone: content.phone,
-      manager: 'manager' in content ? String(content.manager) : ' ',
-      salary: 'salary' in content ? content.salary : 0,
-      employmentType: content.employmentType,
+      salary: content.salary,
       workLocation: content.workLocation,
-      experienceYears: content.experienceYears ?? null,
-      performanceRating: content.performanceRating ?? null,
-      lastAppraisalDate: content.lastAppraisalDate,
-      isActive: content.isActive,
+      performanceRating: content.performanceRating,
+      experienceYears: content.experienceYears,
+      employmentType: undefined,
+      lastAppraisalDate: undefined,
+      isActive: undefined
     });
     this.initialFormValues = this.employeeForm.getRawValue();
   }
@@ -136,7 +135,23 @@ export class EmployeeFormComponent implements OnInit {
     };
     this.employeeResponse.emit({
       title: this.employee?.title || 'Employee',
-      content: outgoingData,
+      content: {
+        id: String(outgoingData.id),
+        firstName: outgoingData.name.split(' ')[0],
+        lastName: outgoingData.name.split(' ')[1],
+        email: outgoingData.email,
+        phone: outgoingData.phone,
+        address: outgoingData.address,
+        designation: outgoingData.designation,
+        salary: outgoingData.salary,
+        joiningDate: '',
+        locationId: outgoingData.workLocation,
+        performanceRating: outgoingData.performanceRating,
+        managerId: outgoingData.manager ? outgoingData.manager.id : null,
+        departmentId: outgoingData.department.id,
+        workLocation: outgoingData.workLocation,
+        experienceYears: outgoingData.experienceYears
+      },
       viewController: this.employee?.viewController || overlayType.ADDEMPLOYEE,
       config: this.employee?.config || defaultTableConfig
     });
@@ -176,7 +191,23 @@ export class EmployeeFormComponent implements OnInit {
     };
     this.employeeResponse.emit({
       title: this.employee?.title || 'Employee',
-      content: outgoingData,
+      content: {
+        id: String(outgoingData.id),
+        firstName: outgoingData.name.split(' ')[0],
+        lastName: outgoingData.name.split(' ')[1],
+        email: outgoingData.email,
+        phone: outgoingData.phone,
+        address: outgoingData.address,
+        designation: outgoingData.designation,
+        salary: outgoingData.salary,
+        joiningDate: '',
+        locationId: outgoingData.workLocation,
+        performanceRating: outgoingData.performanceRating,
+        managerId: outgoingData.manager ? outgoingData.manager.id : null,
+        departmentId: outgoingData.department.id,
+        workLocation: outgoingData.workLocation,
+        experienceYears: outgoingData.experienceYears
+      },
       viewController: this.employee?.viewController || overlayType.EDITEMPLOYEE,
       config: this.employee?.config || defaultTableConfig
     });
