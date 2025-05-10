@@ -7,8 +7,7 @@ export const employeeListConfig: TableConfig = {
     additionCardTitle: 'Add Employee',
     editCardTitle: 'Edit Employee',
     columns: [
-        { key: 'firstName', header: 'First Name', sortable: true, type: ColumnType.TEXT, isSticky: true },
-        { key: 'lastName', header: 'Last Name', sortable: true, type: ColumnType.TEXT },
+        { key: 'name', header: 'Name', sortable: true, type: ColumnType.LINK, isSticky: true },
         { key: 'email', header: 'Email', sortable: true, type: ColumnType.EMAIL },
         { key: 'phone', header: 'Phone', sortable: true, type: ColumnType.TEXT },
         { key: 'address', header: 'Address', sortable: true, type: ColumnType.TEXT },

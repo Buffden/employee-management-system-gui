@@ -28,10 +28,34 @@
     gap: 10px;
 }
 
+.photo-container,
+.profile-picture-placeholder-container,
+.profile-picture-placeholder {
+    width: 150px !important;
+    height: 150px !important;
+    min-width: 150px !important;
+    min-height: 150px !important;
+    max-width: 150px !important;
+    max-height: 150px !important;
+    border-radius: 50% !important;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.photo-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
 .profile-picture-placeholder-container {
     position: relative;
     width: 100%;
-    height: 170px;
+    height: 100%;
 }
 
 /* Circular placeholder for profile picture */
@@ -45,6 +69,7 @@
     align-items: center;
     justify-content: center;
     transition: box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
 /* Add a ring on hover */
@@ -83,8 +108,8 @@
     border-radius: 50%;
     padding: 5px;
     position: absolute;
-    top: 130px;
-    left: 20px;
+    bottom: 10px;
+    right: 10px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease;
@@ -203,12 +228,6 @@
 .text-placeholder:hover {
     background-color: #c3c1c1;
     color: white;
-}
-
-.photo-container {
-    position: relative;
-    width: 170px;
-    height: 170px;
 }
 
 /* Footer Section */
