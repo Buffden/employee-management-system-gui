@@ -28,6 +28,7 @@ export type TableCellData = Employee | Department | TableData;
 export class TableComponent implements OnChanges {
   @Input() inputData: TableCellData[] = [];
   @Input() tableConfig: TableConfig = defaultTableConfig;
+  @Input() linkClickHandler?: (row: TableCellData, colKey: string) => void;
 
   displayedColumns: string[] = [];
   dataSource!: MatTableDataSource<TableCellData>;
@@ -194,5 +195,13 @@ export class TableComponent implements OnChanges {
 
   noData(): boolean {
     return !this.dataSource?.data?.length;
+  }
+
+  handleLinkClick(row: TableCellData, colKey: string): void {
+    if (this.linkClickHandler) {
+      this.linkClickHandler(row, colKey);
+    } else {
+      this.onLinkClick(row);
+    }
   }
 }

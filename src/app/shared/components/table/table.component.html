@@ -72,7 +72,7 @@
                                 <!-- Link -->
                                 <span class="td-content td-link"
                                       *ngSwitchCase="'link'">
-                                    <a (click)="onLinkClick(row)"
+                                    <a (click)="handleLinkClick(row, col.key)"
                                        href="javascript:void(0)">
                                         {{ row[col.key] }}
                                     </a>
