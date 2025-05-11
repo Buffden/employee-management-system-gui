@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { projectsRoutes } from './features/projects/projects-routing.module';
 
 export const routes: Routes = [
   // landing page route to home with full path match
@@ -39,7 +38,7 @@ export const routes: Routes = [
   },
   {
     path: 'projects',
-    children: projectsRoutes
+    loadChildren: () => import('./features/projects/projects-routing.module').then(m => m.ProjectsRoutingModule)
   },
   {
     path: '**',
