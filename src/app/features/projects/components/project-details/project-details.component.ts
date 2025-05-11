@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../../../../shared/models/project.model';
 import { ProjectService } from '../../services/project.service';
@@ -17,7 +17,7 @@ import { ProjectSelectionService } from '../../services/project-selection.servic
 @Component({
   selector: 'app-project-details',
   templateUrl: './project-details.component.html',
-  styleUrls: ['./project-details.component.css'],
+  styleUrls: ['./project-details.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -31,6 +31,10 @@ import { ProjectSelectionService } from '../../services/project-selection.servic
   ]
 })
 export class ProjectDetailsComponent implements OnInit {
+  @Input() item: Project | Task | null = null;
+  @Input() type: 'project' | 'task' = 'project';
+  @Input() parentChain: { id: string; name: string; type: 'project' | 'task' }[] = [];
+
   project: Project | null = null;
   tasks: Task[] = [];
   displayedColumns: string[] = [
@@ -51,15 +55,16 @@ export class ProjectDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const projectId = this.route.snapshot.paramMap.get('id');
-    const selected = this.projectSelectionService.getProject();
-    if (selected && selected.id === projectId) {
-      this.project = selected;
-    } else if (projectId) {
+    const projectId = this.route.snapshot.paramMap.get('projectId') || this.route.snapshot.paramMap.get('id');
+    const taskId = this.route.snapshot.paramMap.get('taskId');
+    this.type = this.route.snapshot.data['type'] || (taskId ? 'task' : 'project');
+
+    if (this.type === 'project' && projectId) {
       this.loadProject(projectId);
-    }
-    if (projectId) {
       this.loadTasks(projectId);
+    } else if (this.type === 'task' && projectId && taskId) {
+      this.loadProject(projectId); // for breadcrumb
+      this.loadTask(taskId);
     }
   }
 
@@ -75,6 +80,12 @@ export class ProjectDetailsComponent implements OnInit {
         this.tasks = tasks.filter(task => task.projectId === projectId);
       },
       error: () => { this.tasks = []; }
+    });
+  }
+
+  loadTask(taskId: string): void {
+    this.taskService.getById(taskId).subscribe(task => {
+      this.item = task;
     });
   }
 
@@ -125,5 +136,17 @@ export class ProjectDetailsComponent implements OnInit {
       default:
         return 'primary';
     }
+  }
+
+  get displayName(): string {
+    if (this.type === 'project') {
+      return this.project?.name || '';
+    } else {
+      return this.item?.name || '';
+    }
+  }
+
+  isTask(item: Project | Task | null): item is Task {
+    return !!item && 'priority' in item;
   }
 } 

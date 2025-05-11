@@ -1,9 +1,9 @@
-<div class="container" *ngIf="project">
+<div class="container" *ngIf="type === 'project' && project">
   <!-- Breadcrumb Navigation -->
   <nav class="breadcrumb-nav">
     <a routerLink="/projects" class="breadcrumb-link">Projects</a>
     <span class="breadcrumb-separator">/</span>
-    <span class="breadcrumb-current">{{project.name}}</span>
+    <span class="breadcrumb-current">{{ project.name }}</span>
   </nav>
 
   <!-- Project Overview -->
@@ -127,5 +127,59 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+  </div>
+</div>
+
+<!-- Task Details View -->
+<div class="container" *ngIf="type === 'task' && isTask(item) && project">
+  <nav class="breadcrumb-nav">
+    <a routerLink="/projects" class="breadcrumb-link">Projects</a>
+    <span class="breadcrumb-separator">/</span>
+    <a [routerLink]="['/projects', project.id]" class="breadcrumb-link">{{ project.name }}</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-current">{{ item.name }}</span>
+  </nav>
+  <div class="task-overview">
+    <div class="header">
+      <h1>{{item.name}}</h1>
+    </div>
+    <div class="task-details">
+      <div class="detail-row">
+        <div class="detail-item">
+          <h3>Status</h3>
+          <mat-chip [color]="getStatusColor(item.status)" selected>
+            {{item.status}}
+          </mat-chip>
+        </div>
+        <div class="detail-item">
+          <h3>Priority</h3>
+          <mat-chip [color]="getPriorityColor(item.priority)" selected>
+            {{item.priority}}
+          </mat-chip>
+        </div>
+        <div class="detail-item">
+          <h3>Assigned To</h3>
+          <p>{{item.assignedTo?.firstName}} {{item.assignedTo?.lastName}}</p>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-item">
+          <h3>Start Date</h3>
+          <p>{{item.startDate | date}}</p>
+        </div>
+        <div class="detail-item">
+          <h3>Due Date</h3>
+          <p>{{item.dueDate | date}}</p>
+        </div>
+        <div class="detail-item">
+          <h3>Completed Date</h3>
+          <p>{{ item.completedDate ? (item.completedDate | date) : 'Not completed' }}</p>
+        </div>
+      </div>
+      <div class="description">
+        <h3>Description</h3>
+        <p>{{item.description}}</p>
+      </div>
+    </div>
   </div>
 </div> 
