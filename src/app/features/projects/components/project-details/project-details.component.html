@@ -65,8 +65,12 @@
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Task Name</th>
-        <td mat-cell *matCellDef="let task" (click)="onTaskClick(task)" class="clickable">
+        <td mat-cell *matCellDef="let task">
+          <a [routerLink]="['/projects', project.id, 'tasks', task.id]"
+            class="breadcrumb-link"
+            style="cursor:pointer;">
           {{task.name}}
+          </a>
         </td>
       </ng-container>
 

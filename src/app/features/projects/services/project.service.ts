@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Project } from '../../../shared/models/project.model';
+import { Task } from '../../../shared/models/task.model';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -14,6 +15,10 @@ export class ProjectService {
 
   getAll(): Observable<Project[]> {
     return this.http.get<Project[]>(this.apiUrl);
+  }
+
+  getProjectWithTasks(id: string): Observable<{ project: Project, tasks: Task[] }> {
+    return this.http.get<{ project: Project, tasks: Task[] }>(`${this.apiUrl}/${id}/details`);
   }
 
   getById(id: string): Observable<Project> {

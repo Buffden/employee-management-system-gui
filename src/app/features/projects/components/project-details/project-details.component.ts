@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Project } from '../../../../shared/models/project.model';
 import { ProjectService } from '../../services/project.service';
 import { MatTableModule } from '@angular/material/table';
@@ -55,17 +55,24 @@ export class ProjectDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const projectId = this.route.snapshot.paramMap.get('projectId') || this.route.snapshot.paramMap.get('id');
-    const taskId = this.route.snapshot.paramMap.get('taskId');
-    this.type = this.route.snapshot.data['type'] || (taskId ? 'task' : 'project');
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      const projectId = params.get('projectId') || params.get('id');
+      const taskId = params.get('taskId');
+      this.type = this.route.snapshot.data['type'] || (taskId ? 'task' : 'project');
 
-    if (this.type === 'project' && projectId) {
-      this.loadProject(projectId);
-      this.loadTasks(projectId);
-    } else if (this.type === 'task' && projectId && taskId) {
-      this.loadProject(projectId); // for breadcrumb
-      this.loadTask(taskId);
-    }
+      if (this.type === 'project' && projectId) {
+        this.projectService.getProjectWithTasks(projectId).subscribe(data => {
+          this.project = data.project;
+          this.tasks = data.tasks;
+        });
+      } else if (this.type === 'task' && projectId && taskId) {
+        this.projectService.getProjectWithTasks(projectId).subscribe(data => {
+          this.project = data.project;
+          this.tasks = data.tasks;
+          this.item = data.tasks.find(task => task.id === taskId) || null;
+        });
+      }
+    });
   }
 
   loadProject(id: string): void {
